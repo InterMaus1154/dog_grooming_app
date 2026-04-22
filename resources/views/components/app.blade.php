@@ -13,7 +13,7 @@
 @auth
     <x-menu/>
 @endif
-<body class="bg-brand-light">
+<body class="bg-taupe-50">
 {{ $slot }}
 @livewireScripts
 </body>
