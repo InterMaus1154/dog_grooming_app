@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -26,5 +27,9 @@ class AuthController extends Controller
         if (!$user || !Hash::check($request->input('password'), $user->password)) {
             return redirect()->route('auth.login.show')->with('error', 'Invalid credentials!')->withInput($request->only('identifier'));
         }
+
+        Auth::login($user);
+
+        return redirect()->intended('/');
     }
 }

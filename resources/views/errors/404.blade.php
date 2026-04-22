@@ -5,8 +5,8 @@
                 <strong>404</strong> Page Not Found
             </h1>
             <div class="flex gap-4">
-                <a class="text-brand-dark underline hover:no-underline" href="/">Home</a>
-                <a class="text-brand-dark underline hover:no-underline" href="/login">Login</a>
+                <a class="text-brand-dark underline hover:no-underline" href="{{route('dashboard')}}">Home</a>
+                <a class="text-brand-dark underline hover:no-underline" href="{{route('auth.login.show')}}">Login</a>
             </div>
         </div>
     </div>

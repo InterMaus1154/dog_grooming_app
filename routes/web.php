@@ -5,33 +5,23 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Controllers\AuthController;
-
-Route::get('/email/verify', function () {
-    return 'Please verify your email!';
-})->name('verification.notice');
-
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-
-    $user = User::findOrFail($request->route('id'));
-
-    Auth::login($user);
-    $request->fulfill();
-
-    return redirect('/after-verification');
-})->middleware(['signed'])->name('verification.verify');
-
-Route::post('/email/verification-notification', function () {
-    request()->user()->sendEmailVerificationNotification();
-
-    return back();
-})->middleware(['auth'])->name('verification.send');
-
-Route::get('/after-verification', function () {
-    return view('after-verification');
-})->middleware('auth');
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmailController;
 
 
-Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function(){
-   Route::get('/login', 'showLogin')->name('auth.login.show');
-   Route::post('/login', 'login')->name('auth.login');
+Route::group(['prefix' => 'email', 'controller' => EmailController::class], function () {
+    Route::get('verify', 'unverified')->name('verification.notice');
+    Route::post('verification-notification', 'resendNotification')->middleware(['auth', 'throttle:5,1'])->name('verification.send');
+    Route::get('verify/{id}/{hash}', 'verifyEmail')->middleware('signed')->name('verification.verify');
+});
+
+Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function () {
+    Route::get('/login', 'showLogin')->name('auth.login.show');
+    Route::post('/login', 'login')->name('auth.login');
+});
+
+Route::group(['middleware' => ['auth', 'verified']], function () {
+
+    Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
+
 });
