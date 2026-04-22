@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         if (!app()->isProduction()) {
             User::create([
                 'email' => 'testadmin@mail.com',
-                'password' => 'testpassword'
+                'password' => 'password',
+                'username' => 'testadmin'
             ]);
         }
 
