@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class EmailController extends Controller
 {
-    public function unverified(): View
+    public function unverified(Request $request): View|RedirectResponse
     {
+        $user = $request->user();
+
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->route('dashboard');
+        }
+
         return view('email.unverified');
     }
 
