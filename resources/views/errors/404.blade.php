@@ -1,4 +1,4 @@
-<x-app>
+<x-app :title="404">
     <div class="h-screen flex justify-center items-center">
         <div class="flex flex-col gap-4 items-center">
             <h1 class="text-brand-dark text-2xl text-center">

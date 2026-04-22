@@ -10,11 +10,19 @@
 
     @livewireStyles
 </head>
-@auth
-    <x-menu/>
-@endif
 <body class="bg-taupe-50">
-{{ $slot }}
+@auth
+    <div class="flex h-screen" x-data="{open: true}" x-cloak>
+        <x-sidebar/>
+        <main class="flex-1 overflow-auto">
+            {{$slot}}
+        </main>
+    </div>
+
+@else
+    {{ $slot }}
+@endif
+
 @livewireScripts
 </body>
 </html>
