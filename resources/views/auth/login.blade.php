@@ -1,4 +1,9 @@
 <x-app title="Login">
+    <div class="fixed top-2 left-2">
+        <h1 class="text-xl">Developed and maintained by
+            <a href="https://markkweb.net/" target="_blank" class="underline text-blue-400">MK</a>
+        </h1>
+    </div>
     <div class="h-screen p-4 sm:p-0 flex items-center sm:justify-center">
         <div
             class="p-8 w-full sm:w-auto sm:min-w-[25%] border border-gray-200 rounded-md flex flex-col text-center gap-8 bg-white">
