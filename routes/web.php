@@ -18,7 +18,10 @@ Route::group(['prefix' => 'email', 'controller' => EmailController::class], func
 Route::group(['prefix' => 'auth', 'controller' => AuthController::class], function () {
     Route::get('/login', 'showLogin')->name('auth.login.show');
     Route::post('/login', 'login')->name('auth.login');
+
+    Route::middleware('auth')->post('/logout', 'logout')->name('auth.logout');
 });
+
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
 

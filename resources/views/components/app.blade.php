@@ -10,10 +10,11 @@
 
     @livewireStyles
 </head>
-<body class="bg-taupe-50">
+<body class="bg-slate-100">
 @auth
-    <div class="flex h-screen" x-data="{open: true}" x-cloak>
+    <div class="flex h-screen relative" x-data="{open: window.innerWidth >= 640}" x-cloak>
         <x-sidebar/>
+        <x-heroicon-s-arrow-right-end-on-rectangle class="w-12 h-12 absolute bottom-0 left-0 cursor-pointer transition-all duration-500" x-bind:class="open ? 'rotate-y-180' : ''" @click="open = !open"/>
         <main class="flex-1 overflow-auto">
             {{$slot}}
         </main>

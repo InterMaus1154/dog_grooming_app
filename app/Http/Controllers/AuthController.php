@@ -32,4 +32,12 @@ class AuthController extends Controller
 
         return redirect()->intended('/');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        session()->flush();
+        session()->regenerateToken();
+        return redirect()->route('auth.login.show');
+    }
 }
