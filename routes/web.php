@@ -23,7 +23,7 @@ Route::group(['prefix' => 'auth', 'controller' => AuthController::class], functi
 });
 
 
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
 
