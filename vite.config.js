@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -14,5 +14,10 @@ export default defineConfig({
         watch: {
             ignored: ['**/storage/framework/views/**'],
         },
+        host: '0.0.0.0',
+        port: 5173,
+        hmr: {
+            host: '192.168.1.111'
+        }
     },
 });
