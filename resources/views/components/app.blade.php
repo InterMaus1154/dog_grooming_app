@@ -16,6 +16,10 @@
         <x-sidebar/>
         <x-heroicon-s-arrow-right-end-on-rectangle class="w-12 h-12 absolute bottom-0 left-0 cursor-pointer transition-all duration-500" x-bind:class="open ? 'rotate-y-180' : ''" @click="open = !open"/>
         <main class="flex-1 overflow-auto">
+            @php
+                $status = \App\Enums\BookingStatus::paid;
+            @endphp
+            <p class="{{$status->getColor()}}">{{$status->getName()}}</p>
             {{$slot}}
         </main>
     </div>
