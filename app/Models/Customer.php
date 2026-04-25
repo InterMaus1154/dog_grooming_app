@@ -14,4 +14,9 @@ class Customer extends Model
     {
         return $this->hasMany(Dog::class, 'customer_id', 'id');
     }
+
+    public function bookings()
+    {
+        return $this->through('dogs')->has('bookings');
+    }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Customer;
 use App\Models\DogBreed;
+use App\Models\Booking;
 
 class Dog extends Model
 {
@@ -19,5 +20,10 @@ class Dog extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'dog_id', 'id');
     }
 }
