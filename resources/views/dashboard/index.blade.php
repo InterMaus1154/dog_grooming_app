@@ -1,2 +1,2 @@
-<x-app title="Dashboard">
+<x-app title="Dashboard" headerTitle="Dashboard">
 </x-app>
