@@ -13,6 +13,10 @@ class ModalContainer extends Component
 
     public function mount()
     {
+        if (app()->isProduction()) {
+            if (!auth()->check()) abort(403);
+        }
+
         // for testing only
         if (true) {
             $this->modalStack[] = [

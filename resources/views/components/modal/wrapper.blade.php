@@ -1,6 +1,7 @@
 @props([
     'size' => 'full',
     'title' => '',
+    'subtitle' => '',
     'content' => null,
     'footer' => null
 ])
@@ -28,11 +29,15 @@
 @endphp
 
 {{--modal skeleton--}}
-<div class="w-full {{$sizes[$size]}} bg-neutral-100 rounded-md divide-y divide-brand-dark mx-auto shadow-xl border border-brand-dark">
+<div
+    class="w-full {{$sizes[$size]}} bg-neutral-100 rounded-md divide-y divide-brand-dark mx-auto shadow-xl border border-brand-dark">
 
     <header class="relative {{$sectionPadding}}">
         <h1 class="text-2xl text-center font-bold text-brand-dark">{{$title}}</h1>
-        <x-mini-button class="absolute right-2 top-2" rounded rose xl icon="x-mark" @click="$dispatch('modal-close')" />
+        @if(!empty($subtitle))
+            <h2 class="text-lg text-center text-brand-dark">{{$subtitle}}</h2>
+        @endif
+        <x-mini-button class="absolute right-2 top-2" rounded rose xl icon="x-mark" @click="$dispatch('modal-close')"/>
     </header>
 
     @if(isset($content))
