@@ -1,5 +1,5 @@
 <label {{$attributes->merge([
-    'class' => 'text-brand-dark'
+    'class' => 'text-brand-dark form-label'
 ])}}>
     {{$slot}}
 </label>

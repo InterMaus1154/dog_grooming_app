@@ -20,6 +20,11 @@
 
 @layer {
     [x-cloak] {
-        display: none !important;;
+        display: none !important;
+    }
+
+    .form-wrapper:has(input[required]) label:after{
+        content: '*';
+        @apply text-red-500;
     }
 }
