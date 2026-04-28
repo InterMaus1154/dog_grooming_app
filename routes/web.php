@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmailController;
-
+use App\Http\Controllers\DogBreedController;
 
 Route::group(['prefix' => 'email', 'controller' => EmailController::class], function () {
     Route::get('verify', 'unverified')->name('verification.notice');
@@ -26,5 +26,9 @@ Route::group(['prefix' => 'auth', 'controller' => AuthController::class], functi
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/', [DashboardController::class, 'showDashboard'])->name('dashboard');
+
+    Route::group(['prefix' => 'breeds', 'controller' => DogBreedController::class], function () {
+        Route::get('/', 'index')->name('breeds.index');
+    });
 
 });

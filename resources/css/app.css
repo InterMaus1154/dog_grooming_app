@@ -1,21 +1,30 @@
 @import 'tailwindcss';
+@import '../../vendor/wireui/wireui/ts/global.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+@source '../../app/**/*.php';
+@source '../../vendor/wireui/wireui';
+
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
     'Segoe UI Symbol', 'Noto Color Emoji';
 
-    --color-brand: oklch(64.5% 0.246 16.439);
-    --color-brand-light: oklch(89.2% 0.058 10.001);
-    --color-brand-dark: oklch(41% 0.159 10.272);
+    --color-brand: oklch(65% 0.15 10);        /* rose-400 range, main accent */
+    --color-brand-light: oklch(95% 0.02 10);  /* rose-50, body bg */
+    --color-brand-dark: oklch(40% 0.12 10);   /* rose-700 range, dark accent */
 }
 
 @layer {
     [x-cloak] {
-        display: none !important;;
+        display: none !important;
+    }
+
+    .form-wrapper:has(input[required]) label:after{
+        content: '*';
+        @apply text-red-500;
     }
 }
