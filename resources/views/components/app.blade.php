@@ -30,7 +30,6 @@
             </div>
         </main>
     </div>
-
 @else
     {{ $slot }}
 @endif

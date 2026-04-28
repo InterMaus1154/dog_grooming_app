@@ -4,26 +4,46 @@
         <h1 class="text-4xl text-center font-bold italic text-brand-dark">
             <a href="{{route('dashboard')}}">GabiGrooming</a>
         </h1>
-        <h2 class="text-center text-xl">Hi, <i>{{auth()->user()->username}}</i></h2>
+        <h2 class="text-center text-xl">Hi,
+            <i>{{auth()->user()->username}}</i>
+        </h2>
         <nav>
             <ul class="flex flex-col gap-2">
+                @php
+                    $active = 'bg-brand-dark text-white hover:bg-white hover:text-brand-dark';
+                    $inactive = 'bg-white text-brand-dark hover:bg-brand-dark hover:text-white'
+                @endphp
                 <li>
-                    <a href="{{route('dashboard')}}" class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">Home</a>
+                    <a href="{{route('dashboard')}}"
+                       class="{{request()->routeIs('dashboard') ? $active : $inactive}} block text-center text-xl transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
+                        Home
+                    </a>
                 </li>
                 <li>
-                    <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">Dogs</a>
+                    <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
+                        Dogs
+                    </a>
                 </li>
                 <li>
-                    <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">Bookings</a>
+                    <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
+                        Bookings
+                    </a>
                 </li>
                 <li>
-                    <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">Customers (owners)</a>
+                    <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
+                        Customers (owners)
+                    </a>
                 </li>
                 <li>
-                    <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">Settings</a>
+                    <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
+                        Settings
+                    </a>
                 </li>
                 <li>
-                    <a href="{{route('breeds.index')}}" class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">Breeds</a>
+                    <a href="{{route('breeds.index')}}"
+                       class="{{request()->routeIs('breeds.*') ? $active : $inactive}}  block text-center text-xl transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
+                        Breeds
+                    </a>
                 </li>
                 <li>
                     <form method="POST" action="{{route('auth.logout')}}">
