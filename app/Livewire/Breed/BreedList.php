@@ -82,7 +82,7 @@ class BreedList extends Component
         return $this->applyFilters($breeds, $this->customFilters());
     }
 
-    #[On('refresh-on-action')]
+    #[On('refresh-breeds')]
     public function refreshOnAction(): void
     {
         $this->dispatch('$refresh');

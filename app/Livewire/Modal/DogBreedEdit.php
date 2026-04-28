@@ -30,7 +30,7 @@ class DogBreedEdit extends Component
             'name' => $this->form->name
         ]);
         $this->dispatch('modal-close');
-        $this->dispatch('refresh-on-action');
+        $this->dispatch('refresh-breeds');
         $this->notification()->success('Breed updated successfully!');
     }
 
