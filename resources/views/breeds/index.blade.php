@@ -6,4 +6,7 @@
             New Breed
         </x-button>
     </x-slot>
+    <x-slot>
+        <livewire:breed.breed-list />
+    </x-slot>
 </x-app>
