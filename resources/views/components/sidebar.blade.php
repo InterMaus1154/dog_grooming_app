@@ -23,6 +23,9 @@
                     <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">Settings</a>
                 </li>
                 <li>
+                    <a href="{{route('breeds.index')}}" class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">Breeds</a>
+                </li>
+                <li>
                     <form method="POST" action="{{route('auth.logout')}}">
                         @csrf
                         <button type="submit" class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer w-full shadow-md">Logout</button>

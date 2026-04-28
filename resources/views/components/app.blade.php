@@ -19,10 +19,11 @@
             x-bind:class="open ? 'rotate-y-180' : ''" @click="open = !open"/>
         <main class="flex-1 overflow-auto p-4">
             <header class="grid grid-cols-3">
-                <div></div>
-                <h1 class="text-4xl text-center font-bold">{{$headerTitle ?? ''}}</h1>
-                {{$headerRight ?? ''}}
-
+                <x-breadcrumbs />
+                <h1 class="text-4xl text-center font-bold text-brand-dark">{{$headerTitle ?? ''}}</h1>
+                <div class="justify-self-end">
+                    {{$headerRight ?? ''}}
+                </div>
             </header>
             {{$slot}}
         </main>
@@ -31,7 +32,6 @@
 @else
     {{ $slot }}
 @endif
-<livewire:loading-indicator />
 <livewire:modal.modal-container/>
 <wireui:scripts/>
 @livewireScripts
