@@ -20,7 +20,7 @@ class ModalContainer extends Component
         // for testing only
         if (false) {
             $this->modalStack[] = [
-                'component' => 'modal.dog-breed-create',
+                'component' => 'modal.alert',
                 'data' => [],
                 'key' => uniqid()
             ];

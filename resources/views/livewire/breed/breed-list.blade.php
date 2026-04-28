@@ -1,4 +1,5 @@
 <div class="space-y-4">
+    <x-session.success />
     {{--filters--}}
     <form wire:submit.prevent class="w-max md:w-[25%] space-y-2 flex items-center justify-center gap-2 ">
         <x-form.input type="text" placeholder="Search by name..." wire:model.live.debounce="filters.name"/>

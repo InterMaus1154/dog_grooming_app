@@ -42,12 +42,23 @@ class BreedList extends Component
     public function deleteBreedEventReceiver(DogBreed $breed): void
     {
         // restrict deletion if breed has dogs
+        if ($breed->dogs()->count() > 0) {
+            $this->dispatch('modal-open', 'modal.alert', [
+                'title' => 'Cannot process',
+                'message' => 'This breed has dogs, so cannot be deleted!'
+            ])->to(ModalContainer::class);
+        } else {
+                session()->flash('success', sprintf('%s breed has been deleted', $breed->name));
+//            $breed->delete();
+
+            $this->dispatch('$refresh');
+        }
     }
 
     public function customSorts(): array
     {
         return [
-            'custom:dog-count' => function (Builder $builder) { // sort by dog count per pbreed
+            'custom:dog-count' => function (Builder $builder) { // sort by dog count per breed
                 return $builder->orderBy(Dog::selectRaw('count(*)')->whereColumn('dogs.dog_breed_id', 'dog_breeds.id'), $this->sortDirection);
             }
         ];
