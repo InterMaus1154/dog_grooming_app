@@ -1,6 +1,7 @@
 @props(['sortField' => null])
 
 @php
+    // in a livewire component, when the field we are sorting by is the same as its name
     $active = isset($sortField) && isset($__livewire) && $__livewire->sortField == $sortField;
 @endphp
 

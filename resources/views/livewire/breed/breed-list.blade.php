@@ -1,4 +1,12 @@
-<div>
+<div class="space-y-4">
+    {{--filters--}}
+    <form wire:submit.prevent class="w-max space-y-2">
+        <x-form.wrapper>
+            <x-form.input type="text" placeholder="Search by name..." wire:model.live.debounce="filters.name"/>
+        </x-form.wrapper>
+        <x-button class="bg-brand!" wire:click="clearFilters()">Reset</x-button>
+    </form>
+
     <x-table>
         <x-slot name="headers">
             <x-table.th>#</x-table.th>
@@ -17,7 +25,7 @@
             @endforeach
         </x-slot>
         <x-slot name="pagination">
-            <x-table.pagination :paginator="$breeds" />
+            <x-table.pagination :paginator="$breeds"/>
         </x-slot>
     </x-table>
 </div>
