@@ -37,7 +37,7 @@
         @if(!empty($subtitle))
             <h2 class="text-lg text-center text-brand-dark">{{$subtitle}}</h2>
         @endif
-        <x-mini-button class="absolute right-2 top-2" rounded rose xl icon="x-mark" @click="$dispatch('modal-close')"/>
+        <x-mini-button class="absolute right-2 top-2" rounded rose lg icon="x-mark" @click="$dispatch('modal-close')"/>
     </header>
 
     @if(isset($content))
