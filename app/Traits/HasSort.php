@@ -4,11 +4,13 @@ namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 
 trait HasSort
 {
     public string $sortDirection = "desc";
-    public ?string $sortField = null;
+
+    public string $sortField = "";
 
     public ?string $resetPageMethod = null;
 

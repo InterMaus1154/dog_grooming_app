@@ -21,7 +21,9 @@ class BreedList extends Component
 
     public function mount(): void
     {
-        $this->initSort('name', 'asc');
+        if(empty($this->sortField)){
+            $this->initSort('name', 'asc');
+        }
         $this->setSortResetPageMethod('resetPage');
         $this->setFilterResetPageMethod('resetPage');
     }
