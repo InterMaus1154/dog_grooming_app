@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Breed;
 
+use App\Livewire\Modal\ModalContainer;
 use App\Models\Dog;
 use App\Models\DogBreed;
 use App\Traits\HasFilter;
 use App\Traits\HasSort;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -24,6 +26,22 @@ class BreedList extends Component
         $this->initSort('name', 'asc');
         $this->initFilters([], 'resetPage');
         $this->setResetPageMethod('resetPage');
+    }
+
+    public function deleteBreed(DogBreed $breed): void
+    {
+        $this->dispatch('modal-open', 'modal.confirm', [
+                'message' => sprintf("This will delete breed '%s'", $breed->name),
+                'event' => 'breed-delete',
+                'eventData' => [$breed]
+            ]
+        )->to(ModalContainer::class);
+    }
+
+    #[On('breed-delete')]
+    public function deleteBreedEventReceiver(DogBreed $breed): void
+    {
+        // restrict deletion if breed has dogs
     }
 
     public function customSorts(): array

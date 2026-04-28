@@ -20,9 +20,10 @@
                     <x-table.cell>{{$breed->dogs_count}}</x-table.cell>
                     <x-table.cell>
                         <div class="space-x-4">
-                            <x-button light md orange label="Delete" icon="trash" wire:click="deleteBreed({{$breed}})"
-                                      wire:confirm="Do you want to remove {{$breed->name}}?"/>
-                            <x-button light md info label="Edit" icon="pencil" wire:click="editBreed({{$breed}})"/>
+                            <x-button light md teal label="Details" icon="eye"></x-button>
+                            <x-button light md info label="Edit" icon="pencil"
+                                      @click="$dispatch('modal-open', {component: 'modal.dog-breed-edit', componentData:{ dogBreedId: {{$breed->id}} }  })"/>
+                            <x-button light md orange label="Delete" icon="trash" wire:click="deleteBreed({{$breed}})"/>
                         </div>
                     </x-table.cell>
                 </x-table.row>
