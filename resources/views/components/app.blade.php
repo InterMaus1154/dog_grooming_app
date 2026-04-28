@@ -18,8 +18,11 @@
             class="w-12 h-12 absolute bottom-0 left-0 cursor-pointer transition-all duration-500"
             x-bind:class="open ? 'rotate-y-180' : ''" @click="open = !open"/>
         <main class="flex-1 overflow-auto p-4">
-            <header>
+            <header class="grid grid-cols-3">
+                <div></div>
                 <h1 class="text-4xl text-center font-bold">{{$headerTitle ?? ''}}</h1>
+                {{$headerRight ?? ''}}
+
             </header>
             {{$slot}}
         </main>
