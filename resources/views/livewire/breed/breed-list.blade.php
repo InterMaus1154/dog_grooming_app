@@ -1,7 +1,7 @@
 <div class="space-y-4">
     {{--filters--}}
     <form wire:submit.prevent class="w-max md:w-[25%] space-y-2 flex items-center justify-center gap-2 ">
-        <x-form.input type="text" placeholder="Search by name..." wire:model.live.debounce="filters.name"/>
+        <x-form.input type="text" placeholder="Search by name..." wire:model.live.debounce.500ms="filters.name"/>
         <x-button class="bg-brand!" wire:click="clearFilters()">Reset</x-button>
     </form>
 
@@ -14,7 +14,7 @@
         </x-slot>
         <x-slot>
             @foreach($breeds as $breed)
-                <x-table.row>
+                <x-table.row wire:key="breed - {{$breed->id}}">
                     <x-table.cell>{{$breeds->firstItem() + $loop->index}}</x-table.cell>
                     <x-table.cell>{{$breed->name}}</x-table.cell>
                     <x-table.cell>{{$breed->dogs_count}}</x-table.cell>
@@ -29,7 +29,8 @@
                             <x-button light md teal icon="eye" class="text-black!"></x-button>
                             <x-button light md info icon="pencil" class="text-black!"
                                       @click="$dispatch('modal-open', {component: 'modal.dog-breed-edit', componentData:{ id: {{$breed->id}} }  })"/>
-                            <x-button light md orange icon="trash" wire:click="deleteBreed({{$breed}})" class="text-black!"/>
+                            <x-button light md orange icon="trash" wire:click="deleteBreed({{$breed}})"
+                                      class="text-black!"/>
                         </div>
                     </x-table.cell>
                 </x-table.row>
