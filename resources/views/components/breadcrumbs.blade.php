@@ -4,9 +4,9 @@
     $segments = collect(Request::segments())->filter(fn($segment) => !is_numeric($segment));
     $sectionIdentifier = Str::kebab($segments->first());
 @endphp
-<div class="flex gap-2 items-center">
+<div class="flex gap-2 items-center text-md">
     <a href="{{route('dashboard')}}">
-        <x-icon name="home" class="text-brand-dark"/>
+        <x-icon name="home" class="text-brand-dark w-5 h-5"/>
     </a>
     @if($segments->isNotEmpty())
         <span class="text-brand-dark"> &gt;</span>

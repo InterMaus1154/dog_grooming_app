@@ -19,11 +19,17 @@
                     <x-table.cell>{{$breed->name}}</x-table.cell>
                     <x-table.cell>{{$breed->dogs_count}}</x-table.cell>
                     <x-table.cell>
-                        <div class="space-x-4">
+                        <div class="gap-4 hidden md:flex">
                             <x-button light md teal label="Details" icon="eye"></x-button>
                             <x-button light md info label="Edit" icon="pencil"
                                       @click="$dispatch('modal-open', {component: 'modal.dog-breed-edit', componentData:{ id: {{$breed->id}} }  })"/>
                             <x-button light md orange label="Delete" icon="trash" wire:click="deleteBreed({{$breed}})"/>
+                        </div>
+                        <div class="gap-4 flex md:hidden">
+                            <x-button light md teal icon="eye"></x-button>
+                            <x-button light md info icon="pencil"
+                                      @click="$dispatch('modal-open', {component: 'modal.dog-breed-edit', componentData:{ id: {{$breed->id}} }  })"/>
+                            <x-button light md orange icon="trash" wire:click="deleteBreed({{$breed}})"/>
                         </div>
                     </x-table.cell>
                 </x-table.row>

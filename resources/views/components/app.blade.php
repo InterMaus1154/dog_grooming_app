@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
         <main class="flex-1 space-y-4 overflow-auto">
             <header class="grid grid-cols-3 top-0 z-10 bg-neutral-50 p-4 shadow-md">
                 <x-breadcrumbs/>
-                <h1 class="text-4xl text-center font-bold text-brand-dark">{{$headerTitle ?? ''}}</h1>
+                <h1 class="text-xl md:text-2xl text-center font-bold text-brand-dark">{{$headerTitle ?? ''}}</h1>
                 <div class="justify-self-end">
                     {{$headerRight ?? ''}}
                 </div>
