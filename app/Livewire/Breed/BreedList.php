@@ -12,13 +12,11 @@ use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
+use WireUi\Traits\WireUiActions;
 
 class BreedList extends Component
 {
-    use HasSort, WithPagination, HasFilter;
-
-    // filters
-    public string $breedName = '';
+    use HasSort, WithPagination, HasFilter, WireUiActions;
 
 
     public function mount(): void
@@ -48,9 +46,8 @@ class BreedList extends Component
                 'message' => 'This breed has dogs, so cannot be deleted!'
             ])->to(ModalContainer::class);
         } else {
-                session()->flash('success', sprintf('%s breed has been deleted', $breed->name));
-//            $breed->delete();
-
+            $this->notification()->success('Success!', sprintf('%s breed has been deleted', $breed->name));
+            $breed->delete();
             $this->dispatch('$refresh');
         }
     }
