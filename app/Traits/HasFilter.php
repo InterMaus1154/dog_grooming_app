@@ -3,9 +3,11 @@
 namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Livewire\Attributes\Url;
 
 trait HasFilter
 {
+    #[Url]
     public array $filters = [];
     public ?string $resetPageMethod = null;
 
@@ -57,6 +59,11 @@ trait HasFilter
         if (isset($this->resetPageMethod) && method_exists($this, $this->resetPageMethod)) {
             $this->{$this->resetPageMethod}();
         }
+    }
+
+    public function setFilterResetPageMethod(string $method): void
+    {
+        $this->resetPageMethod = $method;
     }
 
     public function hasActiveFilters(): bool

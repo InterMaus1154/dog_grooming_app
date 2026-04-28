@@ -22,8 +22,8 @@ class BreedList extends Component
     public function mount(): void
     {
         $this->initSort('name', 'asc');
-        $this->initFilters([], 'resetPage');
-        $this->setResetPageMethod('resetPage');
+        $this->setSortResetPageMethod('resetPage');
+        $this->setFilterResetPageMethod('resetPage');
     }
 
     public function deleteBreed(DogBreed $breed): void

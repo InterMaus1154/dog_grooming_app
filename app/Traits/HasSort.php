@@ -35,7 +35,7 @@ trait HasSort
      * @param string $method
      * @return void
      */
-    public function setResetPageMethod(string $method): void
+    public function setSortResetPageMethod(string $method): void
     {
         $this->resetPageMethod = $method;
     }
