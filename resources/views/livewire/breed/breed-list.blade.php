@@ -22,7 +22,7 @@
                         <div class="space-x-4">
                             <x-button light md teal label="Details" icon="eye"></x-button>
                             <x-button light md info label="Edit" icon="pencil"
-                                      @click="$dispatch('modal-open', {component: 'modal.dog-breed-edit', componentData:{ dogBreedId: {{$breed->id}} }  })"/>
+                                      @click="$dispatch('modal-open', {component: 'modal.dog-breed-edit', componentData:{ id: {{$breed->id}} }  })"/>
                             <x-button light md orange label="Delete" icon="trash" wire:click="deleteBreed({{$breed}})"/>
                         </div>
                     </x-table.cell>

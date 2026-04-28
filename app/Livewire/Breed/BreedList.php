@@ -80,6 +80,11 @@ class BreedList extends Component
         return $this->applyFilters($breeds, $this->customFilters());
     }
 
+    #[On('refresh-on-action')]
+    public function refreshOnAction(): void
+    {
+        $this->dispatch('$refresh');
+    }
 
     public function render(): View
     {
