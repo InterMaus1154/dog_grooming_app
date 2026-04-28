@@ -1,9 +1,7 @@
 <div class="space-y-4">
     {{--filters--}}
-    <form wire:submit.prevent class="w-max space-y-2">
-        <x-form.wrapper>
-            <x-form.input type="text" placeholder="Search by name..." wire:model.live.debounce="filters.name"/>
-        </x-form.wrapper>
+    <form wire:submit.prevent class="w-max md:w-[25%] space-y-2 flex items-center justify-center gap-2 ">
+        <x-form.input type="text" placeholder="Search by name..." wire:model.live.debounce="filters.name"/>
         <x-button class="bg-brand!" wire:click="clearFilters()">Reset</x-button>
     </form>
 
@@ -20,7 +18,13 @@
                     <x-table.cell>{{$breeds->firstItem() + $loop->index}}</x-table.cell>
                     <x-table.cell>{{$breed->name}}</x-table.cell>
                     <x-table.cell>{{$breed->dogs_count}}</x-table.cell>
-                    <x-table.cell></x-table.cell>
+                    <x-table.cell>
+                        <div class="space-x-4">
+                            <x-button light md orange label="Delete" icon="trash" wire:click="deleteBreed({{$breed}})"
+                                      wire:confirm="Do you want to remove {{$breed->name}}?"/>
+                            <x-button light md info label="Edit" icon="pencil" wire:click="editBreed({{$breed}})"/>
+                        </div>
+                    </x-table.cell>
                 </x-table.row>
             @endforeach
         </x-slot>
