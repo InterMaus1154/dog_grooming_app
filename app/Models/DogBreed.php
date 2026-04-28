@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class DogBreed extends Model
 {
     use SoftDeletes;
+
+    protected $fillable = ['name'];
+
     public function dogs()
     {
         return $this->hasMany(Dog::class, 'dog_breed_id', 'id');
