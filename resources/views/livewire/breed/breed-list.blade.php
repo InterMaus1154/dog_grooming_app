@@ -26,10 +26,10 @@
                             <x-button light md orange label="Delete" icon="trash" wire:click="deleteBreed({{$breed}})"/>
                         </div>
                         <div class="gap-4 flex md:hidden">
-                            <x-button light md teal icon="eye"></x-button>
-                            <x-button light md info icon="pencil"
+                            <x-button light md teal icon="eye" class="text-black!"></x-button>
+                            <x-button light md info icon="pencil" class="text-black!"
                                       @click="$dispatch('modal-open', {component: 'modal.dog-breed-edit', componentData:{ id: {{$breed->id}} }  })"/>
-                            <x-button light md orange icon="trash" wire:click="deleteBreed({{$breed}})"/>
+                            <x-button light md orange icon="trash" wire:click="deleteBreed({{$breed}})" class="text-black!"/>
                         </div>
                     </x-table.cell>
                 </x-table.row>
