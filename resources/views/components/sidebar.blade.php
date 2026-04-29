@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
+                    <a href="{{route('customers.index')}}" class="{{request()->routeIs('customers.*') ? $active : $inactive}} text-xl block text-center transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
                         Customers (owners)
                     </a>
                 </li>

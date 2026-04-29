@@ -21,7 +21,7 @@ class BreedList extends Component
 
     public function mount(): void
     {
-        if(empty($this->sortField)){
+        if (empty($this->sortField)) {
             $this->initSort('name', 'asc');
         }
         $this->setSortResetPageMethod('resetPage');
@@ -78,8 +78,8 @@ class BreedList extends Component
         $query = DogBreed::query()
             ->withCount('dogs');
 
-        $breeds = $this->applySort($query, $this->customSorts());
-        return $this->applyFilters($breeds, $this->customFilters());
+        $query = $this->applyFilters($query, $this->customFilters());
+        return $this->applySort($query, $this->customSorts());
     }
 
     #[On('refresh-breeds')]
