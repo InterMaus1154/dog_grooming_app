@@ -7,10 +7,11 @@ use App\Enums\BookingStatus;
 use App\Models\Dog;
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
 
 class Booking extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, LogsActivity;
     public function dog()
     {
         return $this->belongsTo(Dog::class, 'dog_id', 'id');

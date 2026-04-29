@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Dog;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
 
 class Customer extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, LogsActivity;
 
     public function dogs()
     {

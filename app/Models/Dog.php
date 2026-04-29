@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Customer;
 use App\Models\DogBreed;
 use App\Models\Booking;
+use Spatie\Activitylog\Models\Concerns\LogsActivity;
 
 class Dog extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, LogsActivity;
 
     public function dogBreed(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
