@@ -23,7 +23,9 @@ class CustomerList extends Component
     public function customFilters(): array
     {
         return [
-            'name' => fn(Builder $builder, $value) => $builder->where('name', 'like', sprintf('%%%s%%', $value))
+            'search' => function (Builder $builder, $value) {
+                return $builder->where('name', 'like', sprintf('%%%s%%', $value))->orWhere('phone_number', 'like', sprintf('%%%s%%', $value));
+            }
         ];
     }
 
@@ -38,7 +40,6 @@ class CustomerList extends Component
         $query = $this->applySort($query);
         return $query;
     }
-
 
 
     #[On('refresh-customers')]

@@ -2,11 +2,12 @@
 
     {{--filters--}}
     <form wire:submit.prevent class="md:w-[30%] space-y-2 flex items-center justify-center gap-2">
-        <x-form.input type="text" placeholder="Search by name or phone..." wire:model.live.debounce.300ms="filters.search"/>
+        <x-form.input type="text" placeholder="Search by name or phone..."
+                      wire:model.live.debounce.300ms="filters.search"/>
         <x-button class="bg-brand!" wire:click="clearFilters()">Reset</x-button>
     </form>
     <div class="text-sm text-brand-dark whitespace-nowrap">
-            @if(!empty($filters['name']))
+        @if(!empty($filters['name']))
             Found: {{$customers->total()}}
         @endif
     </div>
