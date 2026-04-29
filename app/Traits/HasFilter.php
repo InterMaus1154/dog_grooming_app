@@ -43,8 +43,9 @@ trait HasFilter
     public function applyFilters(Builder $builder, array $customFilters = []): Builder
     {
         foreach ($this->filters as $key => $value) {
-            if ($customFilters[$key]) { // prioritise custom filter over simple where statements
+            if (isset($customFilters[$key])) { // prioritise custom filter over simple where statements
                 $customFilters[$key]($builder, $value);
+
             } else {
                 $builder->where($key, $value);
             }

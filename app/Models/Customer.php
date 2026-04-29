@@ -11,6 +11,8 @@ class Customer extends Model
 {
     use SoftDeletes, LogsActivity;
 
+    protected $fillable = ['name', 'phone_number'];
+
     public function dogs()
     {
         return $this->hasMany(Dog::class, 'customer_id', 'id');

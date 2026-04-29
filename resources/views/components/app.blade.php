@@ -33,7 +33,7 @@
 @else
     {{ $slot }}
 @endif
-<x-notifications />
+<x-notifications z-index="z-[9999]"/>
 <livewire:modal.modal-container/>
 <wireui:scripts/>
 @livewireScripts

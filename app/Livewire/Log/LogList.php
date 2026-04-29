@@ -13,7 +13,7 @@ class LogList extends Component
 
     public function mount(): void
     {
-        $this->initSort('id', 'asc');
+        $this->initSort('id', 'desc');
     }
 
     public function render()

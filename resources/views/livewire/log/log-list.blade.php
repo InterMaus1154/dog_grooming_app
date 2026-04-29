@@ -13,7 +13,7 @@
         </x-slot>
         <x-slot>
             @foreach($logs as $log)
-                <x-table.row wire:key="log - {{$log->id}}">
+                <x-table.row wire:key="log-{{$log->id}}">
                     <x-table.cell>{{$log->id}}</x-table.cell>
                     <x-table.cell>{{$log->log_name}}</x-table.cell>
                     <x-table.cell>{{$log->description}}</x-table.cell>

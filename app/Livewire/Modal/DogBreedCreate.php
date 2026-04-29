@@ -21,14 +21,16 @@ class DogBreedCreate extends Component
         $this->validate();
 
         try{
-            $breed = DogBreed::create([
+            DogBreed::create([
                 'name' => $this->form->name
             ]);
             $this->notification()->success('New breed successfully created!');
         }catch (\Exception $e){
+            $this->dispatch('modal-clear');
             $this->notification()->error('There was an error creating the breed!', 'Contact your administrator (your son)');
-            Log::error("Error at saving a dog breed record");
-            Log::error($e->getMessage());
+            activity('breed')
+                ->withProperties(['error' => $e->getMessage()])
+                ->log('Error at saving a dog breed record');
         }
 
         $this->dispatch('modal-clear');
