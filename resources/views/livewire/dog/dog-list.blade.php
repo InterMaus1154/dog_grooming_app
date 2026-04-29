@@ -1,5 +1,17 @@
 @php use App\Models\Dog; @endphp
 <div class="space-y-4">
+
+    <form wire:submit.prevent class="md:w-[30%] space-y-2 flex items-center justify-center gap-2">
+        <x-form.input type="text" placeholder="Search by dog or customer name..."
+                      wire:model.live.debounce.300ms="filters.search"/>
+        <x-button class="bg-brand!" wire:click="clearFilters()">Reset</x-button>
+    </form>
+    <div class="text-sm text-brand-dark whitespace-nowrap">
+        @if(!empty($filters['search']))
+            Found: {{$dogs->total()}}
+        @endif
+    </div>
+
     <x-table>
         <x-slot name="headers">
             <x-table.th>#</x-table.th>

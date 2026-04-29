@@ -27,6 +27,7 @@ class DogCreate extends Component
                 'dog_breed_id' => $this->form->breedId,
                 'name' => $this->form->name
             ]);
+            $this->notification()->success('Dog has been successfully created!');
         } catch (\Exception $e) {
             $this->notification()->error('Failed to create a new dog record. Contact your administrator');
             activity('dog')

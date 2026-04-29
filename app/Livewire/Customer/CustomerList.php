@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Customer;
 
-use App\Livewire\Modal\ModalContainer;
+
 use App\Models\Customer;
 use App\Traits\HasFilter;
 use App\Traits\HasSort;

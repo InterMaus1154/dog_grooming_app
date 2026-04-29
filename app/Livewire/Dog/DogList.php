@@ -30,7 +30,13 @@ class DogList extends Component
 
     public function customFilters(): array
     {
-        return [];
+        return [
+            'search' => function (Builder $builder, $value) {
+                return $builder->where('name', 'like', sprintf('%%%s%%', $value))->orWhereHas('customer', function (Builder $q) use ($value) {
+                    return $q->where('name', 'like', sprintf("%%%s%%", $value));
+                });
+            }
+        ];
     }
 
     public function createQuery(): Builder
@@ -62,7 +68,7 @@ class DogList extends Component
     }
 
     #[On('dog-delete')]
-    public function deleteDogEventReceive(Dog $dog): void
+    public function deleteDogEventReceiver(Dog $dog): void
     {
         $dog->delete();
         $this->notification()->success('Dog has been successfully deleted');
