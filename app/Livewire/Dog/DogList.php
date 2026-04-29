@@ -42,6 +42,32 @@ class DogList extends Component
 
     }
 
+    public function deleteDog(Dog $dog): void
+    {
+        $dog->loadCount('bookings');
+        if ($dog->bookings_count > 0) {
+            $this->dispatch('modal-open', 'modal.alert', [
+                'title' => 'Cannot proceed',
+                'message' => 'This dog has bookings, so cannot be deleted'
+            ]);
+            return;
+        }
+
+        $this->dispatch('modal-open', 'modal.confirm', [
+                'message' => sprintf("This will delete dog '%s'", $dog->name),
+                'event' => 'dog-delete',
+                'eventData' => [$dog]
+            ]
+        );
+    }
+
+    #[On('dog-delete')]
+    public function deleteDogEventReceive(Dog $dog): void
+    {
+        $dog->delete();
+        $this->notification()->success('Dog has been successfully deleted');
+    }
+
     #[On('refresh-dogs')]
     public function refreshOnAction(): void
     {
