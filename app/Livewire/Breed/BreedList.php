@@ -48,8 +48,8 @@ class BreedList extends Component
                 'message' => 'This breed has dogs, so cannot be deleted!'
             ])->to(ModalContainer::class);
         } else {
-            $this->notification()->success('Success!', sprintf('%s breed has been deleted', $breed->name));
             $breed->delete();
+            $this->notification()->success('Success!', sprintf('%s breed has been deleted', $breed->name));
             $this->dispatch('$refresh');
         }
     }
