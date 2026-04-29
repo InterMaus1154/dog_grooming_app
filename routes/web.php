@@ -7,6 +7,7 @@ use App\Http\Controllers\EmailController;
 use App\Http\Controllers\DogBreedController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DogController;
 
 Route::group(['prefix' => 'email', 'controller' => EmailController::class], function () {
     Route::get('verify', 'unverified')->name('verification.notice');
@@ -32,6 +33,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['prefix' => 'customers', 'controller' => CustomerController::class], function(){
        Route::get('/', 'index')->name('customers.index');
+    });
+
+    Route::group(['prefix' => 'dogs', 'controller' => DogController::class], function(){
+       Route::get('/', 'index')->name('dogs.index');
     });
 
     Route::group(['prefix' => 'logs', 'controller' => LogController::class], function(){

@@ -31,7 +31,7 @@ class CustomerCreate extends Component
                 ->log('Error at creating a customer record');
         }
 
-        $this->dispatch('modal-clear');
+        $this->dispatch('modal-close');
         $this->dispatch('refresh-customers');
     }
 

@@ -13,6 +13,8 @@ class Dog extends Model
 {
     use SoftDeletes, LogsActivity;
 
+    protected $fillable = ['customer_id', 'dog_breed_id', 'name'];
+
     public function dogBreed(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(DogBreed::class, 'dog_breed_id', 'id');
@@ -26,5 +28,10 @@ class Dog extends Model
     public function bookings()
     {
         return $this->hasMany(Booking::class, 'dog_id', 'id');
+    }
+
+    public function latestBooking()
+    {
+        return $this->hasOne(Booking::class)->latestOfMany('scheduled_at');
     }
 }

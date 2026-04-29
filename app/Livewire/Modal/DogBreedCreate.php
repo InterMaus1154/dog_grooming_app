@@ -26,14 +26,14 @@ class DogBreedCreate extends Component
             ]);
             $this->notification()->success('New breed successfully created!');
         }catch (\Exception $e){
-            $this->dispatch('modal-clear');
+            $this->dispatch('modal-close');
             $this->notification()->error('There was an error creating the breed!', 'Contact your administrator (your son)');
             activity('breed')
                 ->withProperties(['error' => $e->getMessage()])
                 ->log('Error at saving a dog breed record');
         }
 
-        $this->dispatch('modal-clear');
+        $this->dispatch('modal-close');
         $this->dispatch('refresh-breeds');
 
     }

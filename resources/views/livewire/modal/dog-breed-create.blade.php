@@ -5,7 +5,7 @@
         is mandatory!
     </x-slot>
     <x-slot name="content">
-        <form wire:submit.prevent wire:submit="save()">
+        <form wire:submit="save()">
             <x-form.wrapper>
                 <x-form.label for="name">Breed Name</x-form.label>
                 <x-form.input type="text" id="name" placeholder="Breed Name" wire:model="form.name" required/>

@@ -11,13 +11,13 @@ class ModalContainer extends Component
 
     public array $modalStack = [];
 
-    public function mount()
+    public function mount(): void
     {
 
         // for testing only
         if (false) {
             $this->modalStack[] = [
-                'component' => 'modal.alert',
+                'component' => 'modal.dog-create',
                 'data' => [],
                 'key' => uniqid()
             ];
