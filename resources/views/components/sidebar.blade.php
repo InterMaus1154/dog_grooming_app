@@ -7,6 +7,9 @@
         <h2 class="text-center text-xl">Hi,
             <i>{{auth()->user()->username}}</i>
         </h2>
+        @if(app()->isLocal())
+            <h3 class="font-bold text-xl text-red-500 text-center">DEBUG LOCAL</h3>
+        @endif
         <nav>
             <ul class="flex flex-col gap-2">
                 @php
@@ -35,14 +38,20 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{route('breeds.index')}}"
+                       class="{{request()->routeIs('breeds.*') ? $active : $inactive}}  block text-center text-xl transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
+                        Breeds
+                    </a>
+                </li>
+                <li>
                     <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
                         Settings
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('breeds.index')}}"
-                       class="{{request()->routeIs('breeds.*') ? $active : $inactive}}  block text-center text-xl transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
-                        Breeds
+                    <a href="{{route('logs.index')}}"
+                       class="{{request()->routeIs('logs.*') ? $active : $inactive}}  block text-center text-xl transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
+                        Logs
                     </a>
                 </li>
                 <li>
