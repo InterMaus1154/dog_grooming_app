@@ -15,7 +15,7 @@
         <x-slot name="headers">
             <x-table.th>#</x-table.th>
             <x-table.th sortField="name">Name</x-table.th>
-            <x-table.th sortField="phone_number">Phone Number</x-table.th>
+            <x-table.th>Phone Number</x-table.th>
             <x-table.th>Bookings</x-table.th>
             <x-table.th>Dogs</x-table.th>
             <x-table.th>Actions</x-table.th>
