@@ -9,7 +9,7 @@
             <div class="flex gap-4">
                 <x-form.wrapper class="w-[50%]">
                     <x-form.label for="date">Date</x-form.label>
-                    <x-form.input type="date" wire:model="form.date" id="date" required/>
+                    <x-form.input type="datetime-local" wire:model="form.dateTime" id="date" required/>
                     @error('form.date')
                     <x-alert negative>{{$message}}</x-alert>
                     @enderror

@@ -10,7 +10,7 @@
         Livewire.dispatch('modal-open', {
             component: 'modal.booking-create',
             componentData: {
-                date: info.startStr
+                dateTime: info.startStr
             }
         });
     };
@@ -25,7 +25,7 @@
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,listWeek'
             },
-            height: 500,
+            height: 800,
             selectable: true,
             select: onCalendarSelect
         });

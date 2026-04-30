@@ -12,6 +12,9 @@ use Spatie\Activitylog\Models\Concerns\LogsActivity;
 class Booking extends Model
 {
     use SoftDeletes, LogsActivity;
+
+    protected $fillable = ['dog_id', 'status', 'scheduled_at', 'notes', 'treatment', 'amount'];
+
     public function dog()
     {
         return $this->belongsTo(Dog::class, 'dog_id', 'id');

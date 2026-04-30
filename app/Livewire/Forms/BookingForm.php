@@ -7,8 +7,8 @@ use Livewire\Form;
 
 class BookingForm extends Form
 {
-    #[Validate('required|date')]
-    public $date = '';
+    #[Validate('required')]
+    public $dateTime = '';
 
     #[Validate('required|exists:dogs,id')]
     public $dogId = '';

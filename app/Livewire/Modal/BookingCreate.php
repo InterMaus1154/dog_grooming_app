@@ -3,26 +3,52 @@
 namespace App\Livewire\Modal;
 
 use App\Livewire\Forms\BookingForm;
+use App\Models\Booking;
 use App\Models\Dog;
+use Carbon\Carbon;
 use Illuminate\View\View;
-use JetBrains\PhpStorm\NoReturn;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use WireUi\Traits\WireUiActions;
 
 class BookingCreate extends Component
 {
 
+    use WireUiActions;
+
     public BookingForm $form;
 
-    public function mount(?string $date = null): void
+    public function mount(?string $dateTime = null): void
     {
-        $this->form->date = $date;
+        if ($dateTime) {
+            $this->form->dateTime = Carbon::parse($dateTime)->format('Y-m-d H:i');
+        }
     }
 
 
     public function save(): void
     {
         $this->form->validate();
+
+        try {
+            Booking::create([
+                'dog_id' => $this->form->dogId,
+                'scheduled_at' => $this->form->dateTime,
+                'amount' => $this->form->amount,
+                'notes' => $this->form->notes,
+                'treatment' => $this->form->treatment
+            ]);
+
+            $this->notification()->success('Successfully created booking');
+        } catch (\Exception $e) {
+            $this->notification()->error('Error at creating booking. Contact your administrator');
+            activity('booking')
+                ->withProperties(['error' => $e->getMessage()])
+                ->log('Error at creating a booking record');
+        }
+
+        $this->dispatch('modal-close');
+        $this->dispatch('refresh-bookings');
     }
 
     #[On('refresh-dogs')]
