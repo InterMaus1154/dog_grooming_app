@@ -1,10 +1,19 @@
 <div>
-    <div id="calendar" ></div>
+    <div id="calendar"></div>
 </div>
 
 
 @script
 <script type="text/javascript">
+
+    const onCalendarSelect = info => {
+        Livewire.dispatch('modal-open', {
+            component: 'modal.booking-create',
+            componentData: {
+                date: info.startStr
+            }
+        });
+    };
 
     const renderCalendar = () => {
         const calendarEl = document.querySelector("#calendar");
@@ -17,6 +26,8 @@
                 right: 'dayGridMonth,timeGridWeek,listWeek'
             },
             height: 500,
+            selectable: true,
+            select: onCalendarSelect
         });
 
         calendar.render();

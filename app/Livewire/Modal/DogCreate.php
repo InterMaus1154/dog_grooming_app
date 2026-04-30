@@ -35,7 +35,7 @@ class DogCreate extends Component
                 ->log('Error at creating a dog record');
         }
 
-        $this->dispatch('modal-clear');
+        $this->dispatch('modal-close');
         $this->dispatch('refresh-dogs');
 
     }
