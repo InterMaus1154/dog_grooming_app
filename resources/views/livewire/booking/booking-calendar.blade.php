@@ -1,35 +1,32 @@
-<div
-    x-data="{
-        calendar: null,
-        init() {
-            $nextTick(() => {
-                this.calendar = new window.FullCalendar(this.$refs.calendar, {
-                    plugins: window.FullCalendarPlugins,
-                    initialView: window.innerWidth < 640 ? 'dayGridWeek' : 'dayGridMonth',
-                    events: {{ Js::from($events) }},
-                    headerToolbar: window.innerWidth < 640 ? {
-                        left: 'prev,next',
-                        center: 'title',
-                        right: 'today'
-                    } : {
-                        left: 'prev,next,today',
-                        center: 'title',
-                        right: 'dayGridMonth,dayGridWeek'
-                    },
-                    height: 'auto',
-                    windowResize: (view) => {
-                        if (window.innerWidth < 640) {
-                            this.calendar.changeView('dayGridWeek');
-                        } else {
-                            this.calendar.changeView('dayGridMonth');
-                        }
-                    }
-                });
-                this.calendar.render();
-            });
-        }
-    }"
-    x-init="init()"
->
-    <div x-ref="calendar"></div>
+<div>
+    <div id="calendar" ></div>
 </div>
+
+
+@script
+<script type="text/javascript">
+
+    const renderCalendar = () => {
+        const calendarEl = document.querySelector("#calendar");
+        const calendar = new window.FullCalendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            plugins: window.FullCalendarPlugins,
+            headerToolbar: {
+                left: 'prev,next,today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,listWeek'
+            },
+            height: 500,
+        });
+
+        calendar.render();
+    };
+
+
+    document.addEventListener("livewire:initialized", () => {
+        setTimeout(renderCalendar, 100); // need to defer for the layout to be computed, otherwise the calendar collapses
+    });
+
+
+</script>
+@endscript
