@@ -15,10 +15,15 @@
         });
     };
 
+    const onEventClick = info => {
+        console.log(info.event.id);
+    };
+
+    let calendar = null;
     const renderCalendar = () => {
         const calendarEl = document.querySelector("#calendar");
-        const calendar = new window.FullCalendar(calendarEl, {
-            initialView: 'dayGridMonth',
+        calendar = new window.FullCalendar(calendarEl, {
+            initialView: 'timeGridWeek',
             plugins: window.FullCalendarPlugins,
             headerToolbar: {
                 left: 'prev,next,today',
@@ -27,7 +32,10 @@
             },
             height: 800,
             selectable: true,
-            select: onCalendarSelect
+            select: onCalendarSelect,
+            events: '/bookings/calendar',
+            timeZone: 'local',
+            eventClick: onEventClick
         });
 
         calendar.render();
@@ -36,6 +44,10 @@
 
     document.addEventListener("livewire:initialized", () => {
         setTimeout(renderCalendar, 100); // need to defer for the layout to be computed, otherwise the calendar collapses
+
+        Livewire.on('refresh-bookings', () => {
+            calendar.refetchEvents();
+        });
     });
 
 

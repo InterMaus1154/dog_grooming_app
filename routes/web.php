@@ -8,6 +8,7 @@ use App\Http\Controllers\DogBreedController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DogController;
+use App\Http\Controllers\BookingController;
 
 Route::group(['prefix' => 'email', 'controller' => EmailController::class], function () {
     Route::get('verify', 'unverified')->name('verification.notice');
@@ -41,6 +42,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['prefix' => 'logs', 'controller' => LogController::class], function(){
        Route::get('/', 'index')->name('logs.index');
+    });
+
+    Route::group(['prefix' => 'bookings', 'controller' => BookingController::class], function(){
+       Route::get('/calendar', 'calendar')->name('bookings.calendar');
     });
 
 });

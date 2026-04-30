@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\BookingStatus;
 use App\Models\Dog;
@@ -24,4 +25,8 @@ class Booking extends Model
     {
         return $this->through('dog')->has('customer');
     }
+
+    protected $casts = [
+        'scheduled_at' => 'datetime'
+    ];
 }
