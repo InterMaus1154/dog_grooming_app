@@ -35,7 +35,9 @@
             select: onCalendarSelect,
             events: '/bookings/calendar',
             timeZone: 'local',
-            eventClick: onEventClick
+            eventClick: onEventClick,
+            slotMinTime: "07:00:00",
+            slotMaxTime: "21:00:00"
         });
 
         calendar.render();
