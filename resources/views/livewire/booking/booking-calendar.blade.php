@@ -27,22 +27,23 @@
             plugins: window.FullCalendarPlugins,
             headerToolbar:
                 window.innerWidth < 1280 ? {
-                    left: 'title',
-                    right: 'prev,next,dayGridMonth,timeGridWeek,listWeek'
+                        left: 'title',
+                        right: 'prev,next,dayGridMonth,timeGridWeek,listWeek'
                     } :
                     {
                         left: 'prev,next,today',
                         center: 'title',
                         right: 'dayGridMonth,timeGridWeek,listWeek'
                     },
-            height: 800,
+            height: 'auto',
             selectable: true,
             select: onCalendarSelect,
             events: '/bookings/calendar',
             timeZone: 'local',
             eventClick: onEventClick,
-            slotMinTime: "07:00:00",
-            slotMaxTime: "21:00:00"
+            slotMinTime: "08:00:00",
+            slotMaxTime: "20:00:00",
+            firstDay: 1
         });
 
         calendar.render();

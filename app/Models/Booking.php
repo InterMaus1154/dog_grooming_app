@@ -14,7 +14,7 @@ class Booking extends Model
 {
     use SoftDeletes, LogsActivity;
 
-    protected $fillable = ['dog_id', 'status', 'scheduled_at', 'notes', 'treatment', 'amount'];
+    protected $fillable = ['dog_id', 'status', 'scheduled_at', 'notes', 'treatment', 'amount', 'ends_at'];
 
     public function dog()
     {
@@ -27,6 +27,7 @@ class Booking extends Model
     }
 
     protected $casts = [
-        'scheduled_at' => 'datetime'
+        'scheduled_at' => 'datetime',
+        'ends_at' => 'datetime'
     ];
 }

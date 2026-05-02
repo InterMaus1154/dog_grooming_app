@@ -33,10 +33,11 @@ class BookingCreate extends Component
         try {
             Booking::create([
                 'dog_id' => $this->form->dogId,
-                'scheduled_at' => $this->form->dateTime,
+                'scheduled_at' => Carbon::parse($this->form->dateTime),
                 'amount' => $this->form->amount,
                 'notes' => $this->form->notes,
-                'treatment' => $this->form->treatment
+                'treatment' => $this->form->treatment,
+                'ends_at' => Carbon::parse($this->form->dateTime)->setTimeFromTimeString($this->form->endsTime)
             ]);
 
             $this->notification()->success('Successfully created booking');

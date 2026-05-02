@@ -8,7 +8,7 @@ use Livewire\Form;
 class BookingForm extends Form
 {
     #[Validate('required')]
-    public $dateTime = '';
+    public $dateTime = ''; // start time of the booking (booked at on that time)
 
     #[Validate('required|exists:dogs,id')]
     public $dogId = '';
@@ -21,4 +21,7 @@ class BookingForm extends Form
 
     #[Validate('nullable|numeric|min:0')]
     public $amount = null;
+
+    #[Validate('nullable|required|after_or_equal:dateTime')]
+    public $endsTime = ''; // (end time of the booking)
 }

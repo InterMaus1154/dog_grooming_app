@@ -16,7 +16,8 @@ class BookingController extends Controller
                 return [
                     'id' => $booking->id,
                     'title' => $booking->dog->name,
-                    'start' => $booking->scheduled_at->format('Y-m-d H:i:s')
+                    'start' => $booking->scheduled_at->format('Y-m-d H:i:s'),
+                    'end' => $booking->ends_at?->format('Y-m-d H:i:s')
                 ];
             })
             ->toArray();
