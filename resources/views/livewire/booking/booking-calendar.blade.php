@@ -25,11 +25,16 @@
         calendar = new window.FullCalendar(calendarEl, {
             initialView: 'timeGridWeek',
             plugins: window.FullCalendarPlugins,
-            headerToolbar: {
-                left: 'prev,next,today',
-                center: 'title',
-                right: 'dayGridMonth,timeGridWeek,listWeek'
-            },
+            headerToolbar:
+                window.innerWidth < 1280 ? {
+                    left: 'title',
+                    right: 'prev,next,dayGridMonth,timeGridWeek,listWeek'
+                    } :
+                    {
+                        left: 'prev,next,today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,listWeek'
+                    },
             height: 800,
             selectable: true,
             select: onCalendarSelect,

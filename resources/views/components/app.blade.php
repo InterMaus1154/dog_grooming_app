@@ -12,7 +12,10 @@
 </head>
 <body class="bg-neutral-50">
 @auth
-    <div class="flex h-svh relative overflow-hidden" x-data="{open: window.innerWidth >= 1280}" x-cloak>
+    <div class="flex h-svh relative overflow-hidden"
+         x-data="{open: window.innerWidth >= 1280 ? (window.localStorage.getItem('sidebar-state') !== null ? window.localStorage.getItem('sidebar-state') === 'true' : true) : false}"
+         x-cloak
+         x-init="$watch('open', value => window.localStorage.setItem('sidebar-state', value))">
         <x-sidebar/>
         <x-heroicon-s-arrow-right-end-on-rectangle
             class="w-12 h-12 absolute z-[200] bottom-0 left-0 cursor-pointer transition-all duration-500"
