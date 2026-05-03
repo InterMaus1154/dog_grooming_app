@@ -35,10 +35,10 @@
                     <x-table.cell>{{$customer->dogs_count}}</x-table.cell>
                     <x-table.cell>
                         <div class="gap-4 hidden md:flex">
-                            <x-button light md teal label="Details" icon="eye"></x-button>
+                            <x-button light md teal label="Details" icon="eye" class="text-black!"></x-button>
                             <x-button light md info label="Edit" icon="pencil"
-                                      @click="$dispatch('modal-open', {component: 'modal.customer-edit', componentData:{ id: {{$customer->id}} }  })"/>
-                            <x-button light md orange label="Delete" icon="trash" wire:click="deleteCustomer({{$customer}})"/>
+                                      @click="$dispatch('modal-open', {component: 'modal.customer-edit', componentData:{ id: {{$customer->id}} }})" class="text-black!"/>
+                            <x-button light md orange label="Delete" icon="trash" wire:click="deleteCustomer({{$customer}})" class="text-black!"/>
                         </div>
                         <div class="gap-4 flex md:hidden">
                             <x-button light md teal icon="eye" class="text-black!"></x-button>

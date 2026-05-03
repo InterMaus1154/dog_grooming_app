@@ -16,7 +16,12 @@
     };
 
     const onEventClick = info => {
-        console.log(info.event.id);
+        Livewire.dispatch('modal-open', {
+            component: 'modal.booking-show',
+            componentData: {
+                bookingId: info.event.id
+            }
+        });
     };
 
     let calendar = null;
