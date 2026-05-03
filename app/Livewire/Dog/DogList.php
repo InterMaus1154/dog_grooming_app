@@ -72,6 +72,7 @@ class DogList extends Component
     {
         $dog->delete();
         $this->notification()->success('Dog has been successfully deleted');
+        $this->dispatch('refresh-dogs');
     }
 
     #[On('refresh-dogs')]

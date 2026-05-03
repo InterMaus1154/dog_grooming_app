@@ -15,7 +15,7 @@ class Confirm extends Component
     public function confirm(): void
     {
         $this->dispatch($this->event, ...$this->eventData);
-        $this->dispatch('modal-clear');
+        $this->dispatch('modal-close');
     }
 
     public function cancel(): void
