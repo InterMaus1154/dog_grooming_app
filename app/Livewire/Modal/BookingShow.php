@@ -18,7 +18,7 @@ class BookingShow extends Component
 
     public function mount(int $bookingId): void
     {
-        $this->booking = Booking::with('dog.customer')->findOrFail($bookingId);
+        $this->booking = Booking::with('dog.customer', 'dog.dogBreed')->findOrFail($bookingId);
     }
 
     public function deleteBooking(Booking $booking): void
@@ -42,9 +42,16 @@ class BookingShow extends Component
 
     public function render(): View
     {
-        $startTime = Carbon::parse($this->booking->scheduled_at)->format('H:i');
-        $endTime = Carbon::parse($this->booking->ends_at)->format('H:i');
-        $prettyDate = Carbon::parse($this->booking->scheduled_at)->format('l d/m/Y');
-        return view('livewire.modal.booking-show', compact('startTime', 'endTime', 'prettyDate'));
+        $startTime = $this->booking->scheduled_at->format('H:i');
+        $endTime = $this->booking->ends_at->format('H:i');
+        $prettyDate = $this->booking->scheduled_at->format('l d/m/Y');
+
+        $previousBooking = Booking::query()
+            ->where('dog_id', $this->booking->dog_id)
+            ->whereDate('scheduled_at', '<', $this->booking->scheduled_at)
+            ->latest('scheduled_at')
+            ->first();
+
+            return view('livewire.modal.booking-show', compact('startTime', 'endTime', 'prettyDate', 'previousBooking'));
     }
 }

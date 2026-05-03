@@ -22,4 +22,13 @@ enum BookingStatus: int
         };
     }
 
+    public function getBadgeColor(): string
+    {
+        return match ($this->value) {
+            0 => 'orange',
+            1 => 'green',
+            2 => 'yellow'
+        };
+    }
+
 }

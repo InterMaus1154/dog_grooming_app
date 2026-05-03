@@ -28,6 +28,7 @@ class Booking extends Model
 
     protected $casts = [
         'scheduled_at' => 'datetime',
-        'ends_at' => 'datetime'
+        'ends_at' => 'datetime',
+        'status' => BookingStatus::class
     ];
 }

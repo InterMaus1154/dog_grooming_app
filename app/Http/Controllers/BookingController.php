@@ -10,12 +10,12 @@ class BookingController extends Controller
     public function calendar(): array
     {
         return Booking::query()
-            ->with('dog')
+            ->with('dog', 'dog.dogBreed')
             ->get()
             ->map(function (Booking $booking) {
                 return [
                     'id' => $booking->id,
-                    'title' => $booking->dog->name,
+                    'title' => sprintf('%s (%s)', $booking->dog->name, $booking->dog->dogBreed->name),
                     'start' => $booking->scheduled_at->format('Y-m-d H:i:s'),
                     'end' => $booking->ends_at?->format('Y-m-d H:i:s')
                 ];
