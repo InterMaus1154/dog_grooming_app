@@ -40,6 +40,11 @@ class BookingShow extends Component
         $this->dispatch('refresh-bookings');
     }
 
+    #[On('refresh-bookings')]
+    public function actionOnBookingRefresh(): void
+    {
+    }
+
     public function render(): View
     {
         $startTime = $this->booking->scheduled_at->format('H:i');
@@ -52,6 +57,6 @@ class BookingShow extends Component
             ->latest('scheduled_at')
             ->first();
 
-            return view('livewire.modal.booking-show', compact('startTime', 'endTime', 'prettyDate', 'previousBooking'));
+        return view('livewire.modal.booking-show', compact('startTime', 'endTime', 'prettyDate', 'previousBooking'));
     }
 }

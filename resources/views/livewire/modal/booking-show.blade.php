@@ -40,7 +40,9 @@
                 <div class="flex flex-wrap flex-col gap-4">
                     <hgroup>
                         <h2 class="text-lg font-bold">Date & time:</h2>
-                        <p>{{$previousBooking->scheduled_at->format('l d/m/Y')}}, {{$previousBooking->scheduled_at->format('H:i')}} - {{$previousBooking->ends_at->format('H:i')}}</p>
+                        <p>{{$previousBooking->scheduled_at->format('l d/m/Y')}}
+                            , {{$previousBooking->scheduled_at->format('H:i')}}
+                            - {{$previousBooking->ends_at->format('H:i')}}</p>
                     </hgroup>
                     <hgroup>
                         <h2 class="text-lg font-bold">Notes:</h2>
@@ -62,7 +64,10 @@
     <x-slot name="footer">
         <div class="flex gap-4 justify-start flex-wrap">
             <x-button light teal lg icon="eye" class="text-black!">Show Dog Details</x-button>
-            <x-button light info lg icon="pencil" class="text-black!">Edit</x-button>
+            <x-button light info lg icon="pencil" class="text-black!"
+                      @click="$dispatch('modal-open', {component: 'modal.booking-edit', componentData: { id: {{$booking->id}} }})">
+                Edit
+            </x-button>
             <x-button light orange lg icon="trash" class="text-black!" wire:click="deleteBooking({{$booking}})">
                 Delete
             </x-button>
