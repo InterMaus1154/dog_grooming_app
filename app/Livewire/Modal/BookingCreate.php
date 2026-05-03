@@ -18,10 +18,14 @@ class BookingCreate extends Component
 
     public BookingForm $form;
 
-    public function mount(?string $dateTime = null): void
+    public function mount(?string $dateTime = null, ?int $dogId = null): void
     {
         if ($dateTime) {
             $this->form->dateTime = Carbon::parse($dateTime)->format('Y-m-d H:i');
+        }
+
+        if ($dogId) {
+            $this->form->dogId = $dogId;
         }
     }
 

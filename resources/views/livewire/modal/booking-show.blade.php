@@ -6,7 +6,7 @@
         <div class="flex justify-center my-4">
             <x-badge lg :color="$booking->status->getBadgeColor()" label="{{$booking->status->getName()}}"/>
         </div>
-        <div class="flex flex-wrap md:grid grid-cols-3 gap-4">
+        <div class="flex flex-wrap justify-around gap-4 w-full bg-gray-50 rounded-md p-4 shadow-md">
             <hgroup>
                 <h2 class="text-xl font-bold">Booking Notes:</h2>
                 @if($booking->notes)
@@ -32,8 +32,8 @@
                 @endif
             </hgroup>
         </div>
-        <div class="my-8">
-            <h2 class="text-2xl italic my-2">Previous visit details:</h2>
+        <div class="my-8 w-full bg-gray-50 rounded-md p-4 shadow-md">
+            <h2 class="text-2xl italic my-2">Previous booking details:</h2>
             @if(!$previousBooking)
                 <i>No previous booking yet!</i>
             @else
@@ -63,7 +63,7 @@
     </x-slot>
     <x-slot name="footer">
         <div class="flex gap-4 justify-start flex-wrap">
-            <x-button light teal lg icon="eye" class="text-black!">Show Dog Details</x-button>
+            <x-button light teal lg icon="eye" class="text-black!" @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}} }})">Show Dog Details</x-button>
             <x-button light info lg icon="pencil" class="text-black!"
                       @click="$dispatch('modal-open', {component: 'modal.booking-edit', componentData: { id: {{$booking->id}} }})">
                 Edit

@@ -18,7 +18,7 @@ class BookingShow extends Component
 
     public function mount(int $bookingId): void
     {
-        $this->booking = Booking::with('dog.customer', 'dog.dogBreed')->findOrFail($bookingId);
+        $this->booking = Booking::with(['dog.customer', 'dog.dogBreed'])->findOrFail($bookingId);
     }
 
     public function deleteBooking(Booking $booking): void
