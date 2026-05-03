@@ -23,7 +23,6 @@
             <x-table.th>Actions</x-table.th>
         </x-slot>
         <x-slot>
-            @php/**@var Dog $dog */ @endphp
             @foreach($dogs as $dog)
                 <x-table.row>
                     <x-table.cell>{{$dogs->firstItem() + $loop->index}}</x-table.cell>
