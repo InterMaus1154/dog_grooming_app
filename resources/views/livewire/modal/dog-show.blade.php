@@ -1,7 +1,7 @@
 <x-modal.wrapper size="5xl">
     <x-slot name="title">{{$dog->name}} ({{$dog->dogBreed->name}})</x-slot>
     <x-slot name="content">
-        <div class="flex flex-wrap gap-4 justify-around w-full bg-gray-50 rounded-md p-4 shadow-md">
+        <div class="flex flex-wrap gap-4 justify-around w-full bg-neutral-50  rounded-md p-4 shadow-md">
             <hgroup>
                 <h2 class="text-xl font-bold">Owner:</h2>
                 <p>{{$dog->customer->name}}</p>
@@ -19,7 +19,7 @@
                 <p>{{$dog->bookings_count}}</p>
             </hgroup>
         </div>
-        <div class="my-8 flex flex-col gap-4 w-full bg-gray-50 rounded-md p-4 shadow-md">
+        <div class="my-8 flex flex-col gap-4 w-full bg-neutral-50 rounded-md p-4 shadow-md">
             <h2 class="text-2xl italic">Upcoming Booking:</h2>
             @if(!$upcomingBooking)
                 <i>No upcoming booking!</i>
@@ -46,7 +46,7 @@
                 </div>
             @endif
         </div>
-        <div class="my-8 flex flex-col gap-4 w-full bg-gray-50 rounded-md p-4 shadow-md">
+        <div class="my-8 flex flex-col gap-4 w-full bg-neutral-50  rounded-md p-4 shadow-md">
             <h2 class="text-2xl italic">Previous Booking:</h2>
             @if(!$previousBooking)
                 <i>No previous booking!</i>
