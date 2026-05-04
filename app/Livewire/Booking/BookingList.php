@@ -7,16 +7,37 @@ use App\Traits\HasFilter;
 use App\Traits\HasSort;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\View\View;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
+use WireUi\Traits\WireUiActions;
 
 class BookingList extends Component
 {
-    use HasSort, HasFilter, WithPagination;
+    use HasSort, HasFilter, WithPagination, WireUiActions;
 
     public function mount(): void
     {
         $this->initSort('id', 'asc', 'resetPage');
+    }
+
+    public function deleteBooking(Booking $booking): void
+    {
+        $booking->loadMissing('dog');
+        $this->dispatch('modal-open', 'modal.confirm', [
+            'message' => sprintf('This will delete booking for %s on %s', $booking->dog->name, $booking->scheduled_at->format('H:i, l d/m/y')),
+            'event' => 'delete-booking',
+            'eventData' => [$booking]
+        ]);
+    }
+
+    #[On('delete-booking')]
+    public function deleteBookingEventReceiver(Booking $booking): void
+    {
+        $booking->delete();
+        $this->notification()->success('Booking has been deleted');
+        $this->dispatch('modal-close');
+        $this->dispatch('refresh-bookings');
     }
 
     public function customSorts(): array
@@ -40,6 +61,14 @@ class BookingList extends Component
         $query = $this->applyFilters($query, $this->customFilters());
         $query = $this->applySort($query, $this->customSorts());
         return $query;
+    }
+
+
+    #[On('refresh-dogs')]
+    #[On('refresh-bookings')]
+    public function refreshReceiver(): void
+    {
+
     }
 
     public function render(): View

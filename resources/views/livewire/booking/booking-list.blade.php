@@ -30,8 +30,6 @@
                             <x-button light orange lg icon="trash" class="text-black!" wire:click="deleteBooking({{$booking}})">
                                 Delete
                             </x-button>
-                            <x-button light rose lg icon="x-circle" class="text-black!" @click="$dispatch('modal-close')">Close
-                            </x-button>
                         </div>
                     </x-table.cell>
                 </x-table.row>
