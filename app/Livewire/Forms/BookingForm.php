@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Forms;
 
+use App\Enums\BookingStatus;
 use Carbon\Carbon;
+use Illuminate\Validation\Rules\Enum;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 use Illuminate\Validation\ValidationException;
@@ -26,6 +28,9 @@ class BookingForm extends Form
 
     #[Validate('required')]
     public $endsTime = ''; // (end time of the booking)
+
+    #[Validate(['nullable', new Enum(BookingStatus::class)])]
+    public $status = BookingStatus::confirmed->value;
 
     public function validateEndsTime(): void
     {
