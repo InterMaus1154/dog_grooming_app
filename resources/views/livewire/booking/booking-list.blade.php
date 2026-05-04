@@ -22,7 +22,7 @@
                     <x-table.cell>{{$booking->created_at->format('d/m/Y')}}</x-table.cell>
                     <x-table.cell>
                         <div class="flex gap-4 flex-nowrap whitespace-nowrap">
-                            <x-button light teal lg icon="eye" class="text-black!" @click="$dispatch('modal-open', {component: 'modal.booking-show', componentData: {id: {{$booking->id}} }})">Show Details</x-button>
+                            <x-button light teal lg icon="eye" class="text-black!" @click="$dispatch('modal-open', {component: 'modal.booking-show', componentData: {bookingId: {{$booking->id}} }})">Details</x-button>
                             <x-button light info lg icon="pencil" class="text-black!"
                                       @click="$dispatch('modal-open', {component: 'modal.booking-edit', componentData: { id: {{$booking->id}} }})">
                                 Edit
