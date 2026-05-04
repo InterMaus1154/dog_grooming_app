@@ -6,15 +6,15 @@
     </x-slot>
     <x-slot name="content">
         <form wire:submit="save()" class="space-y-4">
-            <div class="flex gap-4">
-                <x-form.wrapper class="w-[50%]">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <x-form.wrapper >
                     <x-form.label for="date">Date</x-form.label>
                     <x-form.input type="datetime-local" wire:model="form.dateTime" id="date" required/>
                     @error('form.date')
                     <x-alert negative>{{$message}}</x-alert>
                     @enderror
                 </x-form.wrapper>
-                <x-form.wrapper class="w-[50%]">
+                <x-form.wrapper>
                     <x-form.label for="ends_at">End Time</x-form.label>
                     <x-form.input type="time" wire:model="form.endsTime" required/>
                     @error('form.endsTime')
@@ -34,14 +34,14 @@
                 <x-alert negative>{{$message}}</x-alert>
                 @enderror
             </x-form.wrapper>
-            <div class="flex gap-4">
-                <x-form.wrapper class="w-[50%]">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <x-form.wrapper>
                     <x-form.label for="notes">Notes</x-form.label>
                     <x-textarea id="notes"
                                 placeholder="(Optional)"
                                 wire:model="form.notes"/>
                 </x-form.wrapper>
-                <x-form.wrapper class="w-[50%]">
+                <x-form.wrapper>
                     <x-form.label for="treatment">Treatment</x-form.label>
                     <x-textarea id="treatment" placeholder="(Optional)"
                                 wire:model="form.treatment"/>
