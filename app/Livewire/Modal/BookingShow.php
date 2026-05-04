@@ -27,13 +27,14 @@ class BookingShow extends Component
         $this->dispatch('modal-open', 'modal.confirm', [
             'message' => sprintf('This will delete booking for %s on %s', $booking->dog->name, $booking->scheduled_at->format('H:i, l d/m/y')),
             'event' => 'delete-booking',
-            'eventData' => [$booking]
+            'eventData' => [$booking->id]
         ]);
     }
 
     #[On('delete-booking')]
-    public function deleteBookingEventReceiver(Booking $booking): void
+    public function deleteBookingEventReceiver(int $id): void
     {
+        $booking = Booking::findOrFail($id);
         $booking->delete();
         $this->notification()->success('Booking has been deleted');
         $this->dispatch('modal-close');
