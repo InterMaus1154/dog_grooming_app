@@ -8,7 +8,7 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full bg-neutral-50 rounded-md p-4 shadow-md">
             <hgroup>
-                <h2 class="text-xl font-bold">Booking Notes:</h2>
+                <h2 class="text-xl font-bold">Notes:</h2>
                 @if($booking->notes)
                     <p>{!! nl2br(e($booking->notes)) !!} </p>
                 @else
@@ -16,7 +16,7 @@
                 @endif
             </hgroup>
             <hgroup>
-                <h2 class="text-xl font-bold">Booking Treatment:</h2>
+                <h2 class="text-xl font-bold">Treatment:</h2>
                 @if($booking->treatment)
                     <p>{!! nl2br(e($booking->treatment)) !!} </p>
                 @else
@@ -24,7 +24,7 @@
                 @endif
             </hgroup>
             <hgroup>
-                <h2 class="text-xl font-bold">Booking Amount:</h2>
+                <h2 class="text-xl font-bold">Amount:</h2>
                 @if($booking->amount)
                     <p>£{{number_format($booking->amount, 2)}}</p>
                 @else
@@ -33,7 +33,7 @@
             </hgroup>
         </div>
         <div class="my-8 w-full bg-neutral-50  rounded-md p-4 shadow-md">
-            <h2 class="text-2xl italic my-2">Previous booking details:</h2>
+            <h2 class="text-2xl italic my-2 text-brand-dark">Previous booking details:</h2>
             @if(!$previousBooking)
                 <i>No previous booking yet!</i>
             @else

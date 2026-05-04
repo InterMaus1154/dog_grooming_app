@@ -20,7 +20,7 @@
             </hgroup>
         </div>
         <div class="my-8 flex flex-col gap-4 w-full bg-neutral-50 rounded-md p-4 shadow-md">
-            <h2 class="text-2xl italic">Upcoming Booking:</h2>
+            <h2 class="text-2xl italic text-brand-dark">Upcoming Booking:</h2>
             @if(!$upcomingBooking)
                 <i>No upcoming booking!</i>
             @else
@@ -47,7 +47,7 @@
             @endif
         </div>
         <div class="my-8 flex flex-col gap-4 w-full bg-neutral-50  rounded-md p-4 shadow-md">
-            <h2 class="text-2xl italic">Previous Booking:</h2>
+            <h2 class="text-2xl italic text-brand-dark">Previous Booking:</h2>
             @if(!$previousBooking)
                 <i>No previous booking!</i>
             @else
