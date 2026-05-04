@@ -21,13 +21,12 @@ class BookingShow extends Component
         $this->booking = Booking::with(['dog.customer', 'dog.dogBreed'])->findOrFail($bookingId);
     }
 
-    public function deleteBooking(Booking $booking): void
+    public function deleteBooking(): void
     {
-        $booking->loadMissing('dog');
         $this->dispatch('modal-open', 'modal.confirm', [
-            'message' => sprintf('This will delete booking for %s on %s', $booking->dog->name, $booking->scheduled_at->format('H:i, l d/m/y')),
+            'message' => sprintf('This will delete booking for %s on %s', $this->booking->dog->name, $this->booking->scheduled_at->format('H:i, l d/m/y')),
             'event' => 'delete-booking',
-            'eventData' => [$booking->id]
+            'eventData' => [$this->booking->id]
         ]);
     }
 

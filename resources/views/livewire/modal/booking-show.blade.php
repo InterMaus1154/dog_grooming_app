@@ -68,7 +68,7 @@
                       @click="$dispatch('modal-open', {component: 'modal.booking-edit', componentData: { id: {{$booking->id}} }})">
                 Edit
             </x-button>
-            <x-button light orange lg icon="trash" class="text-black!" wire:click="deleteBooking({{$booking}})">
+            <x-button light orange lg icon="trash" class="text-black!" wire:click="deleteBooking()">
                 Delete
             </x-button>
             <x-button light rose lg icon="x-circle" class="text-black!" @click="$dispatch('modal-close')">Close
