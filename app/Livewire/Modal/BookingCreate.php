@@ -10,6 +10,7 @@ use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use WireUi\Traits\WireUiActions;
+use function Livewire\invade;
 
 class BookingCreate extends Component
 {
@@ -29,10 +30,9 @@ class BookingCreate extends Component
         }
     }
 
-
     public function save(): void
     {
-        $this->form->validate();
+        $this->form->validateAll();
 
         try {
             Booking::create([

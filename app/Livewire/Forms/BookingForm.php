@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use Carbon\Carbon;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -22,6 +23,23 @@ class BookingForm extends Form
     #[Validate('nullable|numeric|min:0')]
     public $amount = null;
 
-    #[Validate('nullable|required|after_or_equal:dateTime')]
+    #[Validate('required')]
     public $endsTime = ''; // (end time of the booking)
+
+    public function validateEndsTime(): void
+    {
+        $start = Carbon::parse($this->dateTime);
+        $end = Carbon::parse($this->dateTime)->setTimeFromTimeString($this->endsTime);
+
+        if($start->lessThan($end)){
+            $this->addError('form.endsTime', 'End time must be after start');
+        }
+
+    }
+
+    public function validateAll(): void
+    {
+        $this->validate();
+        $this->validateEndsTime();
+    }
 }
