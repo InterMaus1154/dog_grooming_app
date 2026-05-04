@@ -32,20 +32,21 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', 'index')->name('breeds.index');
     });
 
-    Route::group(['prefix' => 'customers', 'controller' => CustomerController::class], function(){
-       Route::get('/', 'index')->name('customers.index');
+    Route::group(['prefix' => 'customers', 'controller' => CustomerController::class], function () {
+        Route::get('/', 'index')->name('customers.index');
     });
 
-    Route::group(['prefix' => 'dogs', 'controller' => DogController::class], function(){
-       Route::get('/', 'index')->name('dogs.index');
+    Route::group(['prefix' => 'dogs', 'controller' => DogController::class], function () {
+        Route::get('/', 'index')->name('dogs.index');
     });
 
-    Route::group(['prefix' => 'logs', 'controller' => LogController::class], function(){
-       Route::get('/', 'index')->name('logs.index');
+    Route::group(['prefix' => 'logs', 'controller' => LogController::class], function () {
+        Route::get('/', 'index')->name('logs.index');
     });
 
-    Route::group(['prefix' => 'bookings', 'controller' => BookingController::class], function(){
-       Route::get('/calendar', 'calendar')->name('bookings.calendar');
+    Route::group(['prefix' => 'bookings', 'controller' => BookingController::class], function () {
+        Route::get('/', 'index')->name("bookings.index");
+        Route::get('/calendar', 'calendar')->name('bookings.calendar');
     });
 
 });

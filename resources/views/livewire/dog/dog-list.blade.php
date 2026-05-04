@@ -29,7 +29,7 @@
                     <x-table.cell>{{$dog->name}}</x-table.cell>
                     <x-table.cell>{{$dog->dogBreed->name}}</x-table.cell>
                     <x-table.cell>{{$dog->customer->name}}</x-table.cell>
-                    <x-table.cell>{{$dog->latestBooking ? $dog->latestBooking->scheduled_at : 'N/A'}}</x-table.cell>
+                    <x-table.cell>{{$dog->latestBooking ? prettyDateTimeString($dog->latestBooking->scheduled_at) : 'N/A'}}</x-table.cell>
                     <x-table.cell>{{$dog->bookings_count}}</x-table.cell>
                     <x-table.cell>
                         <div class="gap-4 hidden md:flex">
