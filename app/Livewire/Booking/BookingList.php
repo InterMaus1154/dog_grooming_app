@@ -26,12 +26,12 @@ class BookingList extends Component
         $booking->loadMissing('dog');
         $this->dispatch('modal-open', 'modal.confirm', [
             'message' => sprintf('This will delete booking for %s on %s', $booking->dog->name, $booking->scheduled_at->format('H:i, l d/m/y')),
-            'event' => 'delete-booking',
+            'event' => 'delete-booking-on-list',
             'eventData' => [$booking]
         ]);
     }
 
-    #[On('delete-booking')]
+    #[On('delete-booking-on-list')]
     public function deleteBookingEventReceiver(Booking $booking): void
     {
         $booking->delete();
