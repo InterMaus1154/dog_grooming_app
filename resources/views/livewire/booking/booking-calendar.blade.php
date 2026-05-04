@@ -28,17 +28,17 @@
     const renderCalendar = () => {
         const calendarEl = document.querySelector("#calendar");
         calendar = new window.FullCalendar(calendarEl, {
-            initialView: 'timeGridWeek',
+            initialView: window.innerWidth < 640 ? 'timeGridDay' : 'timeGridWeek',
             plugins: window.FullCalendarPlugins,
             headerToolbar:
                 window.innerWidth < 1280 ? {
                         left: 'title',
-                        right: 'prev,next,dayGridMonth,timeGridWeek,listWeek'
+                        right: 'prev,next,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                     } :
                     {
                         left: 'prev,next,today',
                         center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,listWeek'
+                        right: 'dayGridMonth,timeGridWeek,listWeek,timeGridDay'
                     },
             height: 'auto',
             selectable: true,
@@ -50,7 +50,9 @@
             slotMaxTime: "20:00:00",
             firstDay: 1,
             longPressDelay: 0,
-            selectLongPressDelay: 0
+            selectLongPressDelay: 0,
+            expandRows: true,
+            eventMinHeight: 60
         });
 
         calendar.render();
@@ -62,6 +64,10 @@
 
         Livewire.on('refresh-bookings', () => {
             calendar.refetchEvents();
+        });
+
+        Livewire.on('refresh-dogs', () => {
+           calendar.refetchEvents();
         });
     });
 

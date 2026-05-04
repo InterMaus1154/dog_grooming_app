@@ -34,10 +34,4 @@
         }
     }
 
-    .fc-day{
-        @apply text-xl;
-    }
-
-
-
 }

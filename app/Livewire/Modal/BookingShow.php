@@ -40,6 +40,7 @@ class BookingShow extends Component
         $this->dispatch('refresh-bookings');
     }
 
+    #[On('refresh-dogs')]
     #[On('refresh-bookings')]
     public function actionOnBookingRefresh(): void
     {

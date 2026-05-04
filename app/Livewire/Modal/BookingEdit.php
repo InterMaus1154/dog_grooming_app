@@ -30,7 +30,7 @@ class BookingEdit extends Component
 
     public function save(): void
     {
-        $this->form->validate();
+        $this->form->validateAll();
 
         try {
             $this->booking->update([
