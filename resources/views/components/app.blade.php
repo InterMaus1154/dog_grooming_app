@@ -21,7 +21,7 @@
             class="w-12 h-12 absolute z-[200] bottom-0 left-0 cursor-pointer transition-all duration-500"
             x-bind:class="open ? 'rotate-y-180' : ''" @click="open = !open"/>
         <main class="flex-1 space-y-4 overflow-auto">
-            <header class="grid grid-cols-3 top-0 z-10 bg-neutral-50 p-4 shadow-md">
+            <header class="grid grid-cols-3 top-0 z-10 bg-neutral-50 p-4 shadow-md items-center">
                 <x-breadcrumbs/>
                 <h1 class="text-xl md:text-2xl text-center font-bold text-brand-dark">{{$headerTitle ?? ''}}</h1>
                 <div class="justify-self-end">

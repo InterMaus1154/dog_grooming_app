@@ -38,18 +38,18 @@
                 <x-form.wrapper class="w-[50%]">
                     <x-form.label for="notes">Notes</x-form.label>
                     <x-textarea id="notes"
-                                placeholder="Any notes from the customer or things that are useful (optional)"
+                                placeholder="(Optional)"
                                 wire:model="form.notes"/>
                 </x-form.wrapper>
                 <x-form.wrapper class="w-[50%]">
                     <x-form.label for="treatment">Treatment</x-form.label>
-                    <x-textarea id="treatment" placeholder="Details about treatment for the dog (optional)"
+                    <x-textarea id="treatment" placeholder="(Optional)"
                                 wire:model="form.treatment"/>
                 </x-form.wrapper>
             </div>
             <x-form.wrapper>
                 <x-label for="amount">£ Amount</x-label>
-                <x-form.input type="text" wire:model="form.amount" placeholder="£"/>
+                <x-form.input type="text" wire:model="form.amount" placeholder="Numbers Only"/>
                 @error('form.amount')
                 <x-alert negative>{{$message}}</x-alert>
                 @enderror

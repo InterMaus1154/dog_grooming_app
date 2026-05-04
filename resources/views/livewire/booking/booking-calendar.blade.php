@@ -48,7 +48,9 @@
             eventClick: onEventClick,
             slotMinTime: "08:00:00",
             slotMaxTime: "20:00:00",
-            firstDay: 1
+            firstDay: 1,
+            longPressDelay: 0,
+            selectLongPressDelay: 0
         });
 
         calendar.render();
