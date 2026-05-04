@@ -3,10 +3,19 @@
 @php
     // in a livewire component, when the field we are sorting by is the same as its name
     $active = isset($sortField) && isset($__livewire) && $__livewire->sortField == $sortField;
+
+    $classes = 'px-6 py-3 md:text-xl text-brand-dark';
+    $classes .= $active ? 'italic' : '';
+    $classes .= $sortField ? 'cursor-pointer hover:text-brand select-none' : '';
 @endphp
 
-<th class="px-6 py-3 text-xs md:text-xl text-brand-dark {{$active ? 'italic' : ''}}  {{ $sortField ? 'cursor-pointer hover:text-brand select-none' : '' }}"
-    @if($sortField) wire:click="setSort('{{ $sortField }}')" @endif>
+<th
+    {{$attributes->merge([
+    'class' => $classes
+])}}
+    @if($sortField)
+        wire:click="setSort('{{ $sortField }}')"
+    @endif>
     <div class="flex items-center gap-1">
         {{ $slot }}
         @if($sortField)

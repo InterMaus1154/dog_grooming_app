@@ -23,12 +23,13 @@ class Booking extends Model
 
     public function customer()
     {
-        return $this->through('dog')->has('customer');
+        return $this->hasOneThrough(Customer::class, Dog::class, 'id', 'id', 'dog_id', 'customer_id');
     }
 
     protected $casts = [
         'scheduled_at' => 'datetime',
         'ends_at' => 'datetime',
-        'status' => BookingStatus::class
+        'status' => BookingStatus::class,
+        'created_at' => 'datetime'
     ];
 }

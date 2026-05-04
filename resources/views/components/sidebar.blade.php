@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
+                    <a href="{{route('bookings.index')}}" class="{{request()->routeIs('bookings.*') ? $active : $inactive}}  block text-center text-xl  transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
                         Bookings
                     </a>
                 </li>
