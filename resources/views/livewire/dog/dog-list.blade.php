@@ -39,7 +39,7 @@
                             <x-button light md orange label="Delete" icon="trash" wire:click="deleteDog({{$dog}})" class="text-black!"/>
                         </div>
                         <div class="gap-4 flex md:hidden">
-                            <x-button light md teal icon="eye" class="text-black!"></x-button>
+                            <x-button light md teal icon="eye" class="text-black!" @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}} }})"></x-button>
                             <x-button light md info icon="pencil" class="text-black!"
                                       @click="$dispatch('modal-open', {component: 'modal.dog-edit', componentData:{ id: {{$dog->id}} }  })"/>
                             <x-button light md orange icon="trash" wire:click="deleteDog({{$dog}})"
