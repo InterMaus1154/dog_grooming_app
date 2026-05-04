@@ -43,6 +43,10 @@ class BookingForm extends Form
     public function validateAll(): void
     {
         $this->amount = trim($this->amount) ?: null; // empty strings could cause database errors, we switch to null instead
+
+        // we don't want unnecessary white spaces before and after
+        $this->notes = trim($this->notes);
+        $this->treatment = trim($this->treatment);
         $this->validate();
         $this->validateEndsTime();
 
