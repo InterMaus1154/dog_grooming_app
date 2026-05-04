@@ -51,4 +51,5 @@
             {{$footer}}
         </footer>
     @endif
+    <x-loading-indicator />
 </div>
