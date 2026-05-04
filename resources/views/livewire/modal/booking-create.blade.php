@@ -22,18 +22,27 @@
                     @enderror
                 </x-form.wrapper>
             </div>
-            <x-form.wrapper class="w-full">
-                <x-form.label for="dog_id" class="relative">Dog
-                    <span class="text-red-500">*</span>
-                    <x-mini-button class="absolute top-[-25%]" rounded icon="plus" flat rose
-                                   @click="$dispatch('modal-open', {component: 'modal.dog-create'})"/>
-                </x-form.label>
-                <x-select searchable :options="$dogs" option-label="name" option-value="id" min-items-for-search="1"
-                          wire:model="form.dogId"/>
-                @error('form.dogId')
-                <x-alert negative>{{$message}}</x-alert>
-                @enderror
-            </x-form.wrapper>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <x-form.wrapper class="w-full">
+                    <x-form.label for="dog_id" class="relative">Dog
+                        <span class="text-red-500">*</span>
+                        <x-mini-button class="absolute top-[-25%]" rounded icon="plus" flat rose
+                                       @click="$dispatch('modal-open', {component: 'modal.dog-create'})"/>
+                    </x-form.label>
+                    <x-select searchable :options="$dogs" option-label="name" option-value="id" min-items-for-search="1"
+                              wire:model="form.dogId"/>
+                    @error('form.dogId')
+                    <x-alert negative>{{$message}}</x-alert>
+                    @enderror
+                </x-form.wrapper>
+                <x-form.wrapper>
+                    <x-label for="amount">£ Amount</x-label>
+                    <x-form.input type="text" wire:model="form.amount" placeholder="Numbers Only"/>
+                    @error('form.amount')
+                    <x-alert negative>{{$message}}</x-alert>
+                    @enderror
+                </x-form.wrapper>
+            </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <x-form.wrapper>
                     <x-form.label for="notes">Notes</x-form.label>
@@ -47,13 +56,6 @@
                                 wire:model="form.treatment"/>
                 </x-form.wrapper>
             </div>
-            <x-form.wrapper>
-                <x-label for="amount">£ Amount</x-label>
-                <x-form.input type="text" wire:model="form.amount" placeholder="Numbers Only"/>
-                @error('form.amount')
-                <x-alert negative>{{$message}}</x-alert>
-                @enderror
-            </x-form.wrapper>
         </form>
     </x-slot>
     <x-slot name="footer">

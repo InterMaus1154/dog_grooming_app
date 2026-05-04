@@ -17,7 +17,9 @@ class BookingController extends Controller
                     'id' => $booking->id,
                     'title' => sprintf('%s (%s)', $booking->dog->name, $booking->dog->dogBreed->name),
                     'start' => $booking->scheduled_at->format('Y-m-d H:i:s'),
-                    'end' => $booking->ends_at?->format('Y-m-d H:i:s')
+                    'end' => $booking->ends_at?->format('Y-m-d H:i:s'),
+                    'color' => $booking->status->getCSSColor(),
+                    'textColor' => '#ffffff'
                 ];
             })
             ->toArray();

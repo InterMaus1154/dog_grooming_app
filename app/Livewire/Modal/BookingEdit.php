@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Modal;
 
+use App\Enums\BookingStatus;
 use App\Livewire\Forms\BookingForm;
 use App\Models\Booking;
 use App\Models\Dog;
@@ -39,7 +40,8 @@ class BookingEdit extends Component
                 'amount' => $this->form->amount,
                 'notes' => $this->form->notes,
                 'treatment' => $this->form->treatment,
-                'ends_at' => Carbon::parse($this->form->dateTime)->setTimeFromTimeString($this->form->endsTime)
+                'ends_at' => Carbon::parse($this->form->dateTime)->setTimeFromTimeString($this->form->endsTime),
+                'status' => $this->form->status
             ]);
 
             $this->notification()->success('Successfully updated booking');
@@ -58,6 +60,12 @@ class BookingEdit extends Component
     public function render(): View
     {
         $dogs = Dog::all();
-        return view('livewire.modal.booking-edit', compact('dogs'));
+        $statusOptions = array_map(function (BookingStatus $status) {
+            return [
+                'name' => $status->getName(),
+                'value' => $status->value
+            ];
+        }, BookingStatus::cases());
+        return view('livewire.modal.booking-edit', compact('dogs', 'statusOptions'));
     }
 }
