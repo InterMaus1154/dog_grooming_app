@@ -32,8 +32,8 @@ class DogList extends Component
     {
         return [
             'search' => function (Builder $builder, $value) {
-                return $builder->where('name', 'like', sprintf('%%%s%%', $value))->orWhereHas('customer', function (Builder $q) use ($value) {
-                    return $q->where('name', 'like', sprintf("%%%s%%", $value));
+                return $builder->where('dogs.name', 'like', sprintf('%%%s%%', $value))->orWhereHas('customer', function (Builder $q) use ($value) {
+                    return $q->where('customers.name', 'like', sprintf("%%%s%%", $value))->orWhere('customers.phone_number', 'like', sprintf('%%%s%%', $value));
                 });
             }
         ];

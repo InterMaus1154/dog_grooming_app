@@ -2,7 +2,7 @@
 <div class="space-y-4">
 
     <form wire:submit.prevent class="md:w-[30%] space-y-2 flex items-center justify-center gap-2">
-        <x-form.input type="text" placeholder="Search by dog or customer name..."
+        <x-form.input type="text" placeholder="Search by dog, customer name, or customer phone number..."
                       wire:model.live.debounce.300ms="filters.search"/>
         <x-button class="bg-brand!" wire:click="clearFilters()">Reset</x-button>
     </form>

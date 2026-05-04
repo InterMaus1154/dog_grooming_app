@@ -49,7 +49,20 @@ class BookingList extends Component
 
     public function customFilters(): array
     {
-        return [];
+        return [
+            'search' => function (Builder $builder, $value) {
+                return $builder->whereHas('customer', fn($q) => $q
+                    ->where('customers.name', 'like', sprintf('%%%s%%', $value))
+                    ->orWhere('customers.phone_number', 'like', sprintf('%%%s%%', $value)))
+                    ->orWhereHas('dog', fn($q) => $q->where('dogs.name', 'like', sprintf('%%%s%%', $value)));
+            },
+            'dateFrom' => function(Builder $builder, $value){
+                return $builder->whereDate('bookings.scheduled_at', '>=', $value);
+            },
+            'dateTo' => function(Builder $builder, $value){
+                return $builder->whereDate('bookings.scheduled_at', '<=', $value);
+            }
+        ];
     }
 
     /**

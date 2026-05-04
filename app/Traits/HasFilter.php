@@ -45,7 +45,6 @@ trait HasFilter
         foreach ($this->filters as $key => $value) {
             if (isset($customFilters[$key])) { // prioritise custom filter over simple where statements
                 $customFilters[$key]($builder, $value);
-
             } else {
                 $builder->where($key, $value);
             }
