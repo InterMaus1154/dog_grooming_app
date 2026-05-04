@@ -5,6 +5,7 @@ namespace App\Livewire\Forms;
 use Carbon\Carbon;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Illuminate\Validation\ValidationException;
 
 class BookingForm extends Form
 {
@@ -31,8 +32,10 @@ class BookingForm extends Form
         $start = Carbon::parse($this->dateTime);
         $end = Carbon::parse($this->dateTime)->setTimeFromTimeString($this->endsTime);
 
-        if($start->lessThan($end)){
-            $this->addError('form.endsTime', 'End time must be after start');
+        if ($end->lessThan($start)) {
+            throw ValidationException::withMessages([
+                'form.endsTime' => 'End time must be after start'
+            ]);
         }
 
     }
@@ -41,5 +44,6 @@ class BookingForm extends Form
     {
         $this->validate();
         $this->validateEndsTime();
+
     }
 }
