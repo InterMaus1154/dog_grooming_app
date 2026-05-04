@@ -31,7 +31,7 @@
             initialView: window.innerWidth < 640 ? 'timeGridDay' : 'timeGridWeek',
             plugins: window.FullCalendarPlugins,
             headerToolbar:
-                window.innerWidth < 1280 ? {
+                window.innerWidth < 640 ? {
                         left: 'title',
                         right: 'prev,next,dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                     } :
@@ -49,8 +49,8 @@
             slotMinTime: "08:00:00",
             slotMaxTime: "20:00:00",
             firstDay: 1,
-            longPressDelay: 0,
-            selectLongPressDelay: 0,
+            longPressDelay: 300,
+            selectLongPressDelay: 300,
             expandRows: true,
             eventMinHeight: 60
         });
