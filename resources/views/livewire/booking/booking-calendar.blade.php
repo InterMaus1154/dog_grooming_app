@@ -49,8 +49,8 @@
             slotMinTime: "08:00:00",
             slotMaxTime: "20:00:00",
             firstDay: 1,
-            longPressDelay: 200,
-            selectLongPressDelay: 200,
+            longPressDelay: 100,
+            selectLongPressDelay: 100,
             expandRows: true,
             eventMinHeight: 60
         });
