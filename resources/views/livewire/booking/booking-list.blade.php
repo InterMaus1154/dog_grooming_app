@@ -23,11 +23,11 @@
     <x-table>
         <x-slot name="headers">
             <x-table.th>#</x-table.th>
-            <x-table.th sortField="custom:dog_name">Dog Name</x-table.th>
-            <x-table.th class="w-min" sortField="custom:customer_name">Customer Name</x-table.th>
+            <x-table.th>Dog Name</x-table.th>
+            <x-table.th class="w-min">Customer Name</x-table.th>
             <x-table.th>Status</x-table.th>
             <x-table.th sortField="scheduled_at">Scheduled At</x-table.th>
-            <x-table.th sortfield="created_at">Booked At</x-table.th>
+            <x-table.th sortField="created_at">Booked At</x-table.th>
             <x-table.th class="w-fit">Actions</x-table.th>
         </x-slot>
         <x-slot>
