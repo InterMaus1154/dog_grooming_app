@@ -1,5 +1,8 @@
 <aside x-bind:class="open ? 'w-full sm:w-80' : 'w-0 overflow-hidden'"
        class=" shrink-0 bg-brand-light text-black transition-all duration-300 h-full relative shadow-xl">
+    <x-heroicon-s-arrow-right-end-on-rectangle
+        class="w-10 h-10 absolute z-[200] top-0 right-0 sm:hidden cursor-pointer transition-all duration-500 text-brand-dark"
+        x-bind:class="open ? 'rotate-y-180' : ''" @click="open = !open"/>
     <div class="p-4 flex flex-col gap-4">
         <h1 class="text-4xl text-center font-bold italic text-brand-dark">
             <a href="{{route('dashboard')}}">GabiGrooming</a>
