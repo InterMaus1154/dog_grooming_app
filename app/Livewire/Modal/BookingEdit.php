@@ -8,6 +8,7 @@ use App\Models\Booking;
 use App\Models\Dog;
 use Carbon\Carbon;
 use Illuminate\View\View;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use WireUi\Traits\WireUiActions;
 
@@ -55,6 +56,11 @@ class BookingEdit extends Component
         $this->dispatch('modal-close');
         $this->dispatch('refresh-bookings');
 
+    }
+
+    #[On('refresh-dogs')]
+    public function refreshListener(): void
+    {
     }
 
     public function render(): View
