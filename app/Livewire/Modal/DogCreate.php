@@ -19,13 +19,14 @@ class DogCreate extends Component
 
     public function save(): void
     {
-        $this->form->validate();
+        $this->form->validateAll();
 
         try {
             Dog::create([
                 'customer_id' => $this->form->customerId,
                 'dog_breed_id' => $this->form->breedId,
-                'name' => $this->form->name
+                'name' => $this->form->name,
+                'notes' => $this->form->notes
             ]);
             $this->notification()->success('Dog has been successfully created!');
         } catch (\Exception $e) {

@@ -41,6 +41,10 @@
                 <x-alert negative>{{$message}}</x-alert>
                 @enderror
             </x-form.wrapper>
+            <x-form.wrapper>
+                <x-form.label for="notes">Notes</x-form.label>
+                <x-textarea id="notes" wire:model="form.notes" placeholder="(Allergies, etc...)"/>
+            </x-form.wrapper>
         </form>
     </x-slot>
     <x-slot name="footer">

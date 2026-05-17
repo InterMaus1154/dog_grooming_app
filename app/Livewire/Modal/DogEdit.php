@@ -25,24 +25,27 @@ class DogEdit extends Component
         $this->form->name = $this->dog->name;
         $this->form->breedId = $this->dog->dog_breed_id;
         $this->form->customerId = $this->dog->customer_id;
+        $this->form->notes = $this->dog->notes;
     }
 
 
     #[On('refresh-customers')]
     #[On('refresh-breeds')]
+    #[On('refresh-dogs')]
     public function eventOnRefresh(): void
     {
     }
 
     public function save(): void
     {
-        $this->form->validate();
+        $this->form->validateAll();
 
         try {
             $this->dog->update([
                 'name' => $this->form->name,
                 'dog_breed_id' => $this->form->breedId,
-                'customer_id' => $this->form->customerId
+                'customer_id' => $this->form->customerId,
+                'notes' => $this->form->notes
             ]);
             $this->notification()->success('Dog successfully updated');
         } catch (\Exception $e) {
