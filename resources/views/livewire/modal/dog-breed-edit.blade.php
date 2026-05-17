@@ -5,7 +5,7 @@
         is mandatory!
     </x-slot>
     <x-slot name="content">
-        <form wire:submit.prevent wire:submit="save()">
+        <form id="form-{{$this->getId()}}" wire:submit="save()">
             <x-form.wrapper>
                 <x-form.label>Breed Name</x-form.label>
                 <x-form.input type="text" placeholder="Breed Name" required wire:model="form.name"/>

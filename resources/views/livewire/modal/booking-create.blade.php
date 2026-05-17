@@ -5,7 +5,7 @@
         are required!
     </x-slot>
     <x-slot name="content">
-        <form wire:submit="save()" class="space-y-4">
+        <form id="form-{{$this->getId()}}" wire:submit="save()" class="space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <x-form.wrapper>
                     <x-form.label for="date">Date</x-form.label>

@@ -5,7 +5,7 @@
         is mandatory!
     </x-slot>
     <x-slot name="content">
-        <form wire:submit="save()">
+        <form id="form-{{$this->getId()}}" wire:submit="save()">
             <div class="flex gap-4">
                 <x-form.wrapper class="w-full">
                     <x-form.label for="customer_id" class="relative">Customer
