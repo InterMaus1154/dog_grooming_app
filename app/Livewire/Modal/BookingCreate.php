@@ -63,7 +63,16 @@ class BookingCreate extends Component
 
     public function render(): View
     {
-        $dogs = Dog::all();
+        $dogs = Dog::query()
+            ->with(['dogBreed'])
+            ->get()
+            ->map(function (Dog $dog) {
+                return [
+                    'id' => $dog->id,
+                    'name' => sprintf('%s (%s)', $dog->name, $dog->dogBreed->name)
+                ];
+            })
+            ->toArray();
         return view('livewire.modal.booking-create', compact('dogs'));
     }
 }

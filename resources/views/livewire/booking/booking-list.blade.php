@@ -6,11 +6,11 @@
         <div class="flex gap-4 flex-wrap">
             <x-form.wrapper>
                 <x-form.label for="from">From</x-form.label>
-                <x-form.input type="date" id="from" wire:model.live="filters.dateFrom"/>
+                <x-form.input class="min-w-[150px]" type="date" id="from" wire:model.live="filters.dateFrom"/>
             </x-form.wrapper>
             <x-form.wrapper>
                 <x-form.label for="to">To</x-form.label>
-                <x-form.input type="date" id="to" wire:model.live="filters.dateTo"/>
+                <x-form.input class="min-w-[150px]" type="date" id="to" wire:model.live="filters.dateTo"/>
             </x-form.wrapper>
         </div>
     </form>

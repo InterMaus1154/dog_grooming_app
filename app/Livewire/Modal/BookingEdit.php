@@ -65,7 +65,16 @@ class BookingEdit extends Component
 
     public function render(): View
     {
-        $dogs = Dog::all();
+        $dogs = Dog::query()
+            ->with(['dogBreed'])
+            ->get()
+            ->map(function (Dog $dog) {
+                return [
+                    'id' => $dog->id,
+                    'name' => sprintf('%s (%s)', $dog->name, $dog->dogBreed->name)
+                ];
+            })
+            ->toArray();
         $statusOptions = array_map(function (BookingStatus $status) {
             return [
                 'name' => $status->getName(),
