@@ -48,11 +48,11 @@
                         Breeds
                     </a>
                 </li>
-                <li>
-                    <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
-                        Settings
-                    </a>
-                </li>
+{{--                <li>--}}
+{{--                    <a class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">--}}
+{{--                        Settings--}}
+{{--                    </a>--}}
+{{--                </li>--}}
                 <li>
                     <a href="{{route('logs.index')}}"
                        class="{{request()->routeIs('logs.*') ? $active : $inactive}}  block text-center text-xl transition-all duration-200 font-bold rounded-md py-1 cursor-pointer shadow-md">
@@ -62,7 +62,7 @@
                 <li>
                     <form method="POST" action="{{route('auth.logout')}}">
                         @csrf
-                        <button type="submit" class="bg-white block text-center text-xl hover:bg-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer w-full shadow-md">Logout</button>
+                        <button type="submit" class="bg-white block text-center text-xl hover:bg-brand-dark text-brand-dark hover:text-white transition-all duration-200 font-bold rounded-md py-1 cursor-pointer w-full shadow-md">Logout</button>
                     </form>
                 </li>
             </ul>

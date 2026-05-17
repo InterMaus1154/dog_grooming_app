@@ -30,7 +30,7 @@
 
 {{--modal skeleton--}}
 <div
-    class="w-full {{$sizes[$size]}} bg-neutral-100 rounded-md divide-y divide-brand-dark mx-auto shadow-xl border border-brand-dark">
+    class="w-full {{$sizes[$size]}} bg-neutral-100 rounded-md divide-y divide-brand-dark mx-auto shadow-xl border border-brand-dark" x-trap="true">
 
     <header class="relative px-8 py-4">
         <h1 class="text-2xl text-center font-bold text-brand-dark">{{$title}}</h1>
