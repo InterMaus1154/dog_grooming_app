@@ -34,21 +34,30 @@
             @foreach($bookings as $booking)
                 <x-table.row>
                     <x-table.cell>{{$bookings->firstItem() + $loop->index}}</x-table.cell>
-                    <x-table.cell>{{$booking->dog->name}} ({{$booking->dog->dogBreed->name}})</x-table.cell>
+                    <x-table.cell>
+                        <span class="underline text-blue-500 cursor-pointer" tabindex="0"
+                              @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}}}})"
+                              @keyup.enter="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}}}})">{{$booking->dog->name}} ({{$booking->dog->dogBreed->name}})</span>
+                    </x-table.cell>
                     <x-table.cell>{{$booking->customer->name}}</x-table.cell>
                     <x-table.cell>
                         <x-badge lg :color="$booking->status->getBadgeColor()" label="{{$booking->status->getName()}}"/>
                     </x-table.cell>
-                    <x-table.cell class="whitespace-nowrap">{{prettyDateTimeString($booking->scheduled_at)}} - {{prettyTimeFromDateString($booking->ends_at)}}</x-table.cell>
+                    <x-table.cell class="whitespace-nowrap">{{prettyDateTimeString($booking->scheduled_at)}}
+                        - {{prettyTimeFromDateString($booking->ends_at)}}</x-table.cell>
                     <x-table.cell>{{$booking->created_at->format('d/m/Y')}}</x-table.cell>
                     <x-table.cell>
                         <div class="flex gap-4 flex-nowrap whitespace-nowrap">
-                            <x-button light teal lg icon="eye" class="text-black!" @click="$dispatch('modal-open', {component: 'modal.booking-show', componentData: {bookingId: {{$booking->id}} }})">Details</x-button>
+                            <x-button light teal lg icon="eye" class="text-black!"
+                                      @click="$dispatch('modal-open', {component: 'modal.booking-show', componentData: {bookingId: {{$booking->id}} }})">
+                                Details
+                            </x-button>
                             <x-button light info lg icon="pencil" class="text-black!"
                                       @click="$dispatch('modal-open', {component: 'modal.booking-edit', componentData: { id: {{$booking->id}} }})">
                                 Edit
                             </x-button>
-                            <x-button light orange lg icon="trash" class="text-black!" wire:click="deleteBooking({{$booking}})">
+                            <x-button light orange lg icon="trash" class="text-black!"
+                                      wire:click="deleteBooking({{$booking}})">
                                 Delete
                             </x-button>
                         </div>

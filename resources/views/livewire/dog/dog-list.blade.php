@@ -26,31 +26,39 @@
             @foreach($dogs as $dog)
                 <x-table.row>
                     <x-table.cell>{{$dogs->firstItem() + $loop->index}}</x-table.cell>
-                    <x-table.cell>{{$dog->name}}</x-table.cell>
+                    <x-table.cell>
+                        <span class="underline text-blue-500 cursor-pointer" tabindex="0"
+                              @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}}}})"
+                              @keyup.enter="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}}}})">{{$dog->name}}</span>
+                    </x-table.cell>
                     <x-table.cell>{{$dog->dogBreed->name}}</x-table.cell>
                     <x-table.cell>{{$dog->customer->name}}</x-table.cell>
                     <x-table.cell>{{$dog->latestBooking ? prettyDateTimeString($dog->latestBooking->scheduled_at) : 'N/A'}}</x-table.cell>
                     <x-table.cell>{{$dog->bookings_count}}</x-table.cell>
                     <x-table.cell>
-                        <div class="gap-4 hidden md:flex">
-                            <x-button light md teal label="Details" icon="eye" class="text-black!" @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}} }})"></x-button>
-                            <x-button light md info label="Edit" icon="pencil"
-                                      @click="$dispatch('modal-open', {component: 'modal.dog-edit', componentData:{ id: {{$dog->id}} }  })" class="text-black!"/>
-                            <x-button light md orange label="Delete" icon="trash" wire:click="deleteDog({{$dog}})" class="text-black!"/>
-                        </div>
-                        <div class="gap-4 flex md:hidden">
-                            <x-button light md teal icon="eye" class="text-black!" @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}} }})"></x-button>
-                            <x-button light md info icon="pencil" class="text-black!"
-                                      @click="$dispatch('modal-open', {component: 'modal.dog-edit', componentData:{ id: {{$dog->id}} }  })"/>
-                            <x-button light md orange icon="trash" wire:click="deleteDog({{$dog}})"
-                                      class="text-black!"/>
-                        </div>
-                    </x-table.cell>
-                </x-table.row>
-            @endforeach
-        </x-slot>
-        <x-slot name="pagination">
-            <x-table.pagination :paginator="$dogs"/>
-        </x-slot>
-    </x-table>
+                        <div class=" gap-4 hidden md:flex">
+                        <x-button light md teal label="Details" icon="eye" class="text-black!"
+                                  @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}} }})"></x-button>
+                        <x-button light md info label="Edit" icon="pencil"
+                                  @click="$dispatch('modal-open', {component: 'modal.dog-edit', componentData:{ id: {{$dog->id}} }  })"
+                                  class="text-black!"/>
+                        <x-button light md orange label="Delete" icon="trash" wire:click="deleteDog({{$dog}})"
+                                  class="text-black!"/>
+</div>
+<div class="gap-4 flex md:hidden">
+    <x-button light md teal icon="eye" class="text-black!"
+              @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}} }})"></x-button>
+    <x-button light md info icon="pencil" class="text-black!"
+              @click="$dispatch('modal-open', {component: 'modal.dog-edit', componentData:{ id: {{$dog->id}} }  })"/>
+    <x-button light md orange icon="trash" wire:click="deleteDog({{$dog}})"
+              class="text-black!"/>
+</div>
+</x-table.cell>
+</x-table.row>
+@endforeach
+</x-slot>
+<x-slot name="pagination">
+    <x-table.pagination :paginator="$dogs"/>
+</x-slot>
+</x-table>
 </div>
