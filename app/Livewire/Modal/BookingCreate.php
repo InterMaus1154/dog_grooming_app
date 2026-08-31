@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Modal;
 
+use App\Enums\LivewireEvent;
 use App\Livewire\Forms\BookingForm;
 use App\Models\Booking;
 use App\Models\Dog;
@@ -10,7 +11,6 @@ use Illuminate\View\View;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use WireUi\Traits\WireUiActions;
-use function Livewire\invade;
 
 class BookingCreate extends Component
 {
@@ -52,12 +52,12 @@ class BookingCreate extends Component
                 ->log('Error at creating a booking record');
         }
 
-        $this->dispatch('modal-close');
-        $this->dispatch('refresh-bookings');
+        $this->dispatch(LivewireEvent::MODAL_CLOSE->value);
+        $this->dispatch(LivewireEvent::REFRESH_BOOKINGS->value);
     }
 
-    #[On('refresh-dogs')]
-    public function refreshOnAction(): void
+    #[On(LivewireEvent::REFRESH_DOGS->value)]
+    public function noop(): void
     {
     }
 
