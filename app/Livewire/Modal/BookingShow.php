@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Modal;
 
+use App\Enums\LivewireEvent;
 use App\Models\Booking;
 use Carbon\Carbon;
 use Illuminate\View\View;
@@ -23,25 +24,25 @@ class BookingShow extends Component
 
     public function deleteBooking(): void
     {
-        $this->dispatch('modal-open', 'modal.confirm', [
+        $this->dispatch(LivewireEvent::MODAL_OPEN->value, 'modal.confirm', [
             'message' => sprintf('This will delete booking for %s on %s', $this->booking->dog->name, $this->booking->scheduled_at->format('H:i, l d/m/y')),
-            'event' => 'delete-booking',
+            'event' => LivewireEvent::DELETE_BOOKING->value,
             'eventData' => [$this->booking->id]
         ]);
     }
 
-    #[On('delete-booking')]
+    #[On(LivewireEvent::DELETE_BOOKING->value)]
     public function deleteBookingEventReceiver(int $id): void
     {
         $booking = Booking::findOrFail($id);
         $booking->delete();
         $this->notification()->success('Booking has been deleted');
-        $this->dispatch('modal-close');
-        $this->dispatch('refresh-bookings');
+        $this->dispatch(LivewireEvent::MODAL_CLOSE->value);
+        $this->dispatch(LivewireEvent::REFRESH_BOOKINGS->value);
     }
 
-    #[On('refresh-dogs')]
-    #[On('refresh-bookings')]
+    #[On(LivewireEvent::REFRESH_DOGS->value)]
+    #[On(LivewireEvent::REFRESH_BOOKINGS->value)]
     public function actionOnBookingRefresh(): void
     {
     }

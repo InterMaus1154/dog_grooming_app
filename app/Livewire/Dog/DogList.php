@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dog;
 
+use App\Enums\LivewireEvent;
 use App\Models\Dog;
 use App\Traits\HasFilter;
 use App\Traits\HasSort;
@@ -52,14 +53,14 @@ class DogList extends Component
     {
         $dog->loadCount('bookings');
         if ($dog->bookings_count > 0) {
-            $this->dispatch('modal-open', 'modal.alert', [
+            $this->dispatch(LivewireEvent::MODAL_OPEN->value, 'modal.alert', [
                 'title' => 'Cannot proceed',
                 'message' => 'This dog has bookings, so cannot be deleted'
             ]);
             return;
         }
 
-        $this->dispatch('modal-open', 'modal.confirm', [
+        $this->dispatch(LivewireEvent::MODAL_OPEN->value, 'modal.confirm', [
                 'message' => sprintf("This will delete dog '%s'", $dog->name),
                 'event' => 'dog-delete',
                 'eventData' => [$dog]

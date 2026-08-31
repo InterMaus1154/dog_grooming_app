@@ -3,6 +3,7 @@
 namespace App\Livewire\Customer;
 
 
+use App\Enums\LivewireEvent;
 use App\Models\Customer;
 use App\Traits\HasFilter;
 use App\Traits\HasSort;
@@ -43,37 +44,36 @@ class CustomerList extends Component
     }
 
 
-    #[On('refresh-customers')]
+    #[On(LivewireEvent::REFRESH_CUSTOMERS->value)]
     public function refreshOnAction(): void
     {
-        $this->dispatch('$refresh');
+
     }
 
     public function deleteCustomer(Customer $customer): void
     {
 
         if ($customer->dogs()->count() > 0) {
-            $this->dispatch('modal-open', 'modal.alert', [
+            $this->dispatch(LivewireEvent::MODAL_OPEN->value, 'modal.alert', [
                 'title' => 'Cannot proceed',
                 'message' => 'A customer with dogs/bookings cannot be deleted'
             ]);
             return;
         }
 
-        $this->dispatch('modal-open', 'modal.confirm', [
+        $this->dispatch(LivewireEvent::MODAL_OPEN->value, 'modal.confirm', [
                 'message' => sprintf("This will delete customer '%s'", $customer->name),
-                'event' => 'customer-delete',
+                'event' => LivewireEvent::CUSTOMER_DELETE->value,
                 'eventData' => [$customer]
             ]
         );
     }
 
-    #[On('customer-delete')]
+    #[On(LivewireEvent::CUSTOMER_DELETE->value)]
     public function deleteCustomerEventReceiver(Customer $customer): void
     {
         $customer->delete();
         $this->notification()->success('Customer has been deleted');
-        $this->dispatch('$refresh');
     }
 
     public function render(): View

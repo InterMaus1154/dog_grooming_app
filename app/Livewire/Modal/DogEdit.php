@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Modal;
 
+use App\Enums\LivewireEvent;
 use App\Livewire\Forms\DogForm;
 use App\Models\Customer;
 use App\Models\Dog;
@@ -29,9 +30,9 @@ class DogEdit extends Component
     }
 
 
-    #[On('refresh-customers')]
-    #[On('refresh-breeds')]
-    #[On('refresh-dogs')]
+    #[On(LivewireEvent::REFRESH_CUSTOMERS->value)]
+    #[On(LivewireEvent::REFRESH_BREEDS->value)]
+    #[On(LivewireEvent::REFRESH_DOGS->value)]
     public function eventOnRefresh(): void
     {
     }
@@ -56,8 +57,8 @@ class DogEdit extends Component
                 ->log('Error at updating a dog record');
         }
 
-        $this->dispatch('modal-close');
-        $this->dispatch('refresh-dogs');
+        $this->dispatch(LivewireEvent::MODAL_CLOSE->value);
+        $this->dispatch(LivewireEvent::REFRESH_DOGS->value);
 
     }
 

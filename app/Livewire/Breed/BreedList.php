@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Breed;
 
+use App\Enums\LivewireEvent;
 use App\Livewire\Modal\ModalContainer;
 use App\Models\Dog;
 use App\Models\DogBreed;
@@ -30,27 +31,26 @@ class BreedList extends Component
 
     public function deleteBreed(DogBreed $breed): void
     {
-        $this->dispatch('modal-open', 'modal.confirm', [
+        $this->dispatch(LivewireEvent::MODAL_OPEN->value, 'modal.confirm', [
                 'message' => sprintf("This will delete breed '%s'", $breed->name),
-                'event' => 'breed-delete',
+                'event' => LivewireEvent::BREED_DELETE->value,
                 'eventData' => [$breed]
             ]
         )->to(ModalContainer::class);
     }
 
-    #[On('breed-delete')]
+    #[On(LivewireEvent::BREED_DELETE->value)]
     public function deleteBreedEventReceiver(DogBreed $breed): void
     {
         // restrict deletion if breed has dogs
         if ($breed->dogs()->count() > 0) {
-            $this->dispatch('modal-open', 'modal.alert', [
+            $this->dispatch(LivewireEvent::MODAL_OPEN->value, 'modal.alert', [
                 'title' => 'Cannot process',
                 'message' => 'This breed has dogs, so cannot be deleted!'
             ])->to(ModalContainer::class);
         } else {
             $breed->delete();
             $this->notification()->success('Success!', sprintf('%s breed has been deleted', $breed->name));
-            $this->dispatch('$refresh');
         }
     }
 
@@ -82,10 +82,10 @@ class BreedList extends Component
         return $this->applySort($query, $this->customSorts());
     }
 
-    #[On('refresh-breeds')]
+    #[On(LivewireEvent::REFRESH_BREEDS->value)]
     public function refreshOnAction(): void
     {
-        $this->dispatch('$refresh');
+
     }
 
     public function render(): View

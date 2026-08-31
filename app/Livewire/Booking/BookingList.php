@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Booking;
 
+use App\Enums\LivewireEvent;
 use App\Models\Booking;
 use App\Traits\HasFilter;
 use App\Traits\HasSort;
@@ -24,21 +25,21 @@ class BookingList extends Component
     public function deleteBooking(Booking $booking): void
     {
         $booking->loadMissing('dog');
-        $this->dispatch('modal-open', 'modal.confirm', [
+        $this->dispatch(LivewireEvent::MODAL_OPEN->value, 'modal.confirm', [
             'message' => sprintf('This will delete booking for %s on %s', $booking->dog->name, $booking->scheduled_at->format('H:i, l d/m/y')),
-            'event' => 'delete-booking-on-list',
+            'event' => LivewireEvent::DELETE_BOOKING_ON_LIST->value,
             'eventData' => [$booking->id]
         ]);
     }
 
-    #[On('delete-booking-on-list')]
+    #[On(LivewireEvent::DELETE_BOOKING_ON_LIST->value)]
     public function deleteBookingEventReceiver(int $id): void
     {
         $booking = Booking::findOrFail($id);
         $booking->delete();
         $this->notification()->success('Booking has been deleted');
-        $this->dispatch('modal-close');
-        $this->dispatch('refresh-bookings');
+        $this->dispatch(LivewireEvent::MODAL_CLOSE->value);
+        $this->dispatch(LivewireEvent::REFRESH_BOOKINGS->value);
     }
 
     public function customSorts(): array
@@ -78,8 +79,8 @@ class BookingList extends Component
     }
 
 
-    #[On('refresh-dogs')]
-    #[On('refresh-bookings')]
+    #[On(LivewireEvent::REFRESH_DOGS->value)]
+    #[On(LivewireEvent::REFRESH_BOOKINGS->value)]
     public function refreshReceiver(): void
     {
 
