@@ -15,7 +15,7 @@
             </x-form.wrapper>
             <x-form.wrapper>
                 <x-form.label for="phone_number">Phone Number</x-form.label>
-                <x-form.input id="phone_number" type="text" wire:model="form.phoneNumber" required
+                <x-form.input id="phone_number" type="text" wire:model="form.phoneNumber"
                               placeholder="Phone Number"/>
                 @error('form.phoneNumber')
                 <x-alert negative :title="$message"/>
