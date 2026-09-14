@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Domain\Customer\Contracts\CustomerRepository;
+use App\Infrastructure\Customer\CustomerEloquentRepository;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\Login;
@@ -14,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(CustomerRepository::class, CustomerEloquentRepository::class);
     }
 
     /**
