@@ -32,4 +32,32 @@ class Booking extends Model
         'status' => BookingStatus::class,
         'created_at' => 'datetime'
     ];
+
+    public function getTitle(): string
+    {
+        if(!is_null($this->getDogId())){
+            return $this->getDog()->getName();
+        }
+
+        if(!is_null($this->getAttribute('title'))){
+            return $this->getAttribute('title');
+        }
+
+        return "(No dog selected)";
+    }
+
+    public function getDogId(): ?int
+    {
+        return $this->getAttribute('dog_id');
+    }
+
+    public function getDog(): ?Dog
+    {
+        return is_null($this->getDogId()) ? null : $this->dog;
+    }
+
+    public function getCustomer(): ?Customer
+    {
+        return is_null($this->getDogId()) ? null : $this->customer;
+    }
 }

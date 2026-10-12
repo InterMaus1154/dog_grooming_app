@@ -39,4 +39,9 @@ class Dog extends Model
     {
         return nl2br(e($this->notes));
     }
+
+    public function getName(): string
+    {
+        return $this->getAttribute('name');
+    }
 }

@@ -1,6 +1,6 @@
 <x-modal.wrapper size="5xl">
     <x-slot name="title">
-        {{$booking->dog->name}} ({{$booking->dog->dogBreed->name}}), {{$prettyDate}} {{$startTime}} - {{$endTime}}
+        {{$prettyDate}} {{$startTime}} - {{$endTime}}
     </x-slot>
     <x-slot name="content">
         <div class="flex justify-center my-4">

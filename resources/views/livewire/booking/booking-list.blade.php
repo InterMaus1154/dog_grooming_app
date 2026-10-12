@@ -1,5 +1,8 @@
 <div class="space-y-4">
-
+    @php
+        /** @var \App\Models\Booking $booking */
+        /** @var \Illuminate\Database\Eloquent\Collection<int, \App\Models\Booking> $bookings */
+    @endphp
     <form wire:submit.prevent class="md:w-[30%] space-y-2 flex items-start flex-col justify-center gap-2">
         <x-form.input type="text" placeholder="Search by dog, customer name, or customer phone number.."
                       wire:model.live.debounce.300ms="filters.search"/>
@@ -35,11 +38,25 @@
                 <x-table.row>
                     <x-table.cell>{{$bookings->firstItem() + $loop->index}}</x-table.cell>
                     <x-table.cell>
-                        <span class="underline text-blue-500 cursor-pointer" tabindex="0"
-                              @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}}}})"
-                              @keyup.enter="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}}}})">{{$booking->dog->name}} ({{$booking->dog->dogBreed->name}})</span>
+                        @if($booking->getDogId())
+                            <span class="underline text-blue-500 cursor-pointer" tabindex="0"
+                                  @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}}}})"
+                                  @keyup.enter="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}}}})">{{$booking->dog->name}} ({{$booking->dog->dogBreed->name}})</span>
+                        @else
+                            <i>
+                                {{$booking->getTitle()}}
+                            </i>
+                        @endif
                     </x-table.cell>
-                    <x-table.cell>{{$booking->customer->name}}</x-table.cell>
+                    <x-table.cell>
+                        @if($booking->getDogId())
+                            {{$booking->customer->name}}
+                        @else
+                            <i>
+                                {{$booking->getTitle()}}
+                            </i>
+                        @endif
+                    </x-table.cell>
                     <x-table.cell>
                         <x-badge lg :color="$booking->status->getBadgeColor()" label="{{$booking->status->getName()}}"/>
                     </x-table.cell>

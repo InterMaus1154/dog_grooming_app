@@ -14,8 +14,8 @@ class BookingForm extends Form
     #[Validate('required')]
     public $dateTime = ''; // start time of the booking (booked at on that time)
 
-    #[Validate('required|exists:dogs,id')]
-    public $dogId = '';
+    #[Validate('nullable|exists:dogs,id')]
+    public $dogId = null;
 
     #[Validate('nullable|string')]
     public $notes = '';
@@ -31,6 +31,9 @@ class BookingForm extends Form
 
     #[Validate(['nullable', new Enum(BookingStatus::class)])]
     public $status = BookingStatus::confirmed->value;
+
+    #[Validate(['string', 'max:300', 'nullable'])]
+    public $title = '';
 
     public function validateEndsTime(): void
     {
@@ -52,6 +55,7 @@ class BookingForm extends Form
         // we don't want unnecessary white spaces before and after
         $this->notes = trim($this->notes);
         $this->treatment = trim($this->treatment);
+        $this->title = trim($this->title);
         $this->validate();
         $this->validateEndsTime();
 
