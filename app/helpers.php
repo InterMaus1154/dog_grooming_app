@@ -22,11 +22,15 @@ if(!function_exists('prettyDateTimeString')){
 if(!function_exists('prettyTimeFromDateString')){
     /**
      * Returns format example: 14:00
-     * @param Carbon|string $dateTime
+     * @param Carbon|string|null $dateTime
      * @return string
      */
-    function prettyTimeFromDateString(Carbon|string $dateTime):string
+    function prettyTimeFromDateString(Carbon|string|null $dateTime): string
     {
+        if(is_null($dateTime)){
+            return "";
+        }
+
         if(is_string($dateTime)){
             $dateTime = Carbon::parse($dateTime);
         }
