@@ -1,6 +1,10 @@
 @php use App\Models\Dog; @endphp
 <div class="space-y-4">
 
+    @php
+        /** @var Dog $dog */
+        /** @var \App\Models\Customer $customer */
+    @endphp
     <form wire:submit.prevent class="md:w-[30%] space-y-2 flex items-center justify-center gap-2">
         <x-form.input type="text" placeholder="Search by dog, customer name, or customer phone number..."
                       wire:model.live.debounce.300ms="filters.search"/>
@@ -16,7 +20,7 @@
         <x-slot name="headers">
             <x-table.th>#</x-table.th>
             <x-table.th sortField="name">Dog Name</x-table.th>
-            <x-table.th sortField="breed_id">Breed</x-table.th>
+            <x-table.th sortField="dog_breed_id">Breed</x-table.th>
             <x-table.th sortField="customer_id">Owner</x-table.th>
             <x-table.th>Last Visit</x-table.th>
             <x-table.th>Total Bookings</x-table.th>
@@ -31,34 +35,46 @@
                               @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}}}})"
                               @keyup.enter="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}}}})">{{$dog->name}}</span>
                     </x-table.cell>
-                    <x-table.cell>{{$dog->dogBreed->name}}</x-table.cell>
-                    <x-table.cell>{{$dog->customer->name}}</x-table.cell>
+                    <x-table.cell>
+                        @if($dog->hasBreed())
+                            {{$dog->dogBreed->getName()}}
+                        @else
+                            <i>{{$dog->breedFallback()}}</i>
+                        @endif
+                    </x-table.cell>
+                    <x-table.cell>
+                        @if($dog->hasCustomer())
+                            {{$dog->customer->getName()}}
+                        @else
+                          <i>{{$dog->customerFallback()}}</i>
+                        @endif
+                    </x-table.cell>
                     <x-table.cell>{{$dog->latestBooking ? prettyDateTimeString($dog->latestBooking->scheduled_at) : 'N/A'}}</x-table.cell>
                     <x-table.cell>{{$dog->bookings_count}}</x-table.cell>
                     <x-table.cell>
-                        <div class=" gap-4 hidden md:flex">
-                        <x-button light md teal label="Details" icon="eye" class="text-black!"
-                                  @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}} }})"></x-button>
-                        <x-button light md info label="Edit" icon="pencil"
-                                  @click="$dispatch('modal-open', {component: 'modal.dog-edit', componentData:{ id: {{$dog->id}} }  })"
-                                  class="text-black!"/>
-                        <x-button light md orange label="Delete" icon="trash" wire:click="deleteDog({{$dog}})"
-                                  class="text-black!"/>
-</div>
-<div class="gap-4 flex md:hidden">
-    <x-button light md teal icon="eye" class="text-black!"
-              @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}} }})"></x-button>
-    <x-button light md info icon="pencil" class="text-black!"
-              @click="$dispatch('modal-open', {component: 'modal.dog-edit', componentData:{ id: {{$dog->id}} }  })"/>
-    <x-button light md orange icon="trash" wire:click="deleteDog({{$dog}})"
-              class="text-black!"/>
-</div>
-</x-table.cell>
-</x-table.row>
-@endforeach
-</x-slot>
-<x-slot name="pagination">
-    <x-table.pagination :paginator="$dogs"/>
-</x-slot>
-</x-table>
+                        <div class="gap-4 hidden md:flex">
+                            <x-button light md teal label="Details" icon="eye" class="text-black!"
+                                      @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}} }})"></x-button>
+                            <x-button light md info label="Edit" icon="pencil"
+                                      @click="$dispatch('modal-open', {component: 'modal.dog-edit', componentData:{ id: {{$dog->id}} }  })"
+                                      class="text-black!"/>
+                            <x-button light md orange label="Delete" icon="trash" wire:click="deleteDog({{$dog}})"
+                                      class="text-black!"/>
+                        </div>
+                        <div class="gap-4 flex md:hidden">
+                            <x-button light md teal icon="eye" class="text-black!"
+                                      @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$dog->id}} }})"></x-button>
+                            <x-button light md info icon="pencil" class="text-black!"
+                                      @click="$dispatch('modal-open', {component: 'modal.dog-edit', componentData:{ id: {{$dog->id}} }  })"/>
+                            <x-button light md orange icon="trash" wire:click="deleteDog({{$dog}})"
+                                      class="text-black!"/>
+                        </div>
+                    </x-table.cell>
+                </x-table.row>
+            @endforeach
+        </x-slot>
+        <x-slot name="pagination">
+            <x-table.pagination :paginator="$dogs"/>
+        </x-slot>
+    </x-table>
 </div>

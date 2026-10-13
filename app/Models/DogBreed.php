@@ -17,4 +17,9 @@ class DogBreed extends Model
     {
         return $this->hasMany(Dog::class, 'dog_breed_id', 'id');
     }
+
+    public function getName(): string
+    {
+        return $this->getAttribute('name');
+    }
 }

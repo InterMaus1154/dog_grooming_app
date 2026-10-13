@@ -7,11 +7,11 @@ use Livewire\Form;
 
 class DogForm extends Form
 {
-    #[Validate('required|exists:customers,id')]
-    public $customerId = '';
+    #[Validate('nullable|exists:customers,id')]
+    public $customerId = null;
 
-    #[Validate('required|exists:dog_breeds,id')]
-    public $breedId = '';
+    #[Validate('nullable|exists:dog_breeds,id')]
+    public $breedId = null;
 
     #[Validate('required|string|min:2|max:50')]
     public string $name = '';

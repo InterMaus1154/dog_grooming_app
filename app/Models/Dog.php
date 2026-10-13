@@ -44,4 +44,24 @@ class Dog extends Model
     {
         return $this->getAttribute('name');
     }
+
+    public function hasBreed(): bool
+    {
+        return !is_null($this->getAttribute('dog_breed_id'));
+    }
+
+    public function hasCustomer(): bool
+    {
+        return !is_null($this->getAttribute('customer_id'));
+    }
+
+    public function breedFallback(): string
+    {
+        return '(No breed selected)';
+    }
+
+    public function customerFallback(): string
+    {
+        return '(No customer selected)';
+    }
 }

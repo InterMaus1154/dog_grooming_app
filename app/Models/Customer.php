@@ -117,4 +117,5 @@ class Customer extends Model
     {
         return $this->through('dogs')->has('bookings');
     }
+
 }

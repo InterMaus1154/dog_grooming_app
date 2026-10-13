@@ -6,10 +6,16 @@
     </x-slot>
     <x-slot name="content">
         <form id="form-{{$this->getId()}}" wire:submit="save()">
+            <x-form.wrapper>
+                <x-form.label for="name">Dog Name</x-form.label>
+                <x-form.input type="text" placeholder="Dog Name" wire:model="form.name" required/>
+                @error('form.name')
+                <x-alert negative>{{$message}}</x-alert>
+                @enderror
+            </x-form.wrapper>
             <div class="flex gap-4">
                 <x-form.wrapper class="w-full">
                     <x-form.label for="customer_id" class="relative">Customer
-                        <span class="text-red-500">*</span>
                         <x-mini-button class="absolute top-[-25%]" rounded icon="plus" flat rose
                                        @click="$dispatch('modal-open', {component: 'modal.customer-create'})"/>
                     </x-form.label>
@@ -22,7 +28,6 @@
                 </x-form.wrapper>
                 <x-form.wrapper class="w-full">
                     <x-form.label for="breed_id" class="relative">Breed
-                        <span class="text-red-500">*</span>
                         <x-mini-button class="absolute top-[-25%]" rounded icon="plus" flat rose
                                        @click="$dispatch('modal-open', {component: 'modal.dog-breed-create'})"/>
                     </x-form.label>
@@ -34,13 +39,6 @@
                     @enderror
                 </x-form.wrapper>
             </div>
-            <x-form.wrapper>
-                <x-form.label for="name">Dog Name</x-form.label>
-                <x-form.input type="text" placeholder="Dog Name" wire:model="form.name" required/>
-                @error('form.name')
-                <x-alert negative>{{$message}}</x-alert>
-                @enderror
-            </x-form.wrapper>
             <x-form.wrapper>
                 <x-form.label for="notes">Notes</x-form.label>
                 <x-textarea id="notes" wire:model="form.notes" placeholder="(Allergies, etc...)"/>
