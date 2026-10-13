@@ -35,15 +35,25 @@ class Booking extends Model
 
     public function getTitle(): string
     {
-        if(!is_null($this->getDogId())){
+        if($this->hasDog()){
             return $this->getDog()->getName();
         }
 
-        if(!is_null($this->getAttribute('title'))){
+        if($this->hasTitle()){
             return $this->getAttribute('title');
         }
 
         return "(No dog selected)";
+    }
+
+    public function hasDog(): bool
+    {
+        return !is_null($this->getDogId());
+    }
+
+    public function hasTitle(): bool
+    {
+        return !is_null($this->getAttribute('title'));
     }
 
     public function getDogId(): ?int
