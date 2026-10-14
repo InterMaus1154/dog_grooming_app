@@ -41,7 +41,12 @@
                         @if($booking->getDogId())
                             <span class="underline text-blue-500 cursor-pointer" tabindex="0"
                                   @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}}}})"
-                                  @keyup.enter="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}}}})">{{$booking->dog->name}} ({{$booking->dog->dogBreed->name}})</span>
+                                  @keyup.enter="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}}}})">
+                                {{$booking->dog->name}}
+                                @if($booking->dog->hasBreed())
+                                    {{$booking->dog->dogBreed->getName()}})
+                                @endif
+                            </span>
                         @else
                             <i>
                                 {{$booking->getTitle()}}
@@ -50,11 +55,13 @@
                     </x-table.cell>
                     <x-table.cell>
                         @if($booking->getDogId())
-                            {{$booking->customer->name}}
+                            @if($booking->dog->hasCustomer())
+                                {{$booking->customer->getName()}}
+                            @else
+                                <i>(No customer selected)</i>
+                            @endif
                         @else
-                            <i>
-                                {{$booking->getTitle()}}
-                            </i>
+                            <i>(No customer selected)</i>
                         @endif
                     </x-table.cell>
                     <x-table.cell>

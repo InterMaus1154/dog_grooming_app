@@ -67,9 +67,13 @@ class BookingCreate extends Component
             ->with(['dogBreed'])
             ->get()
             ->map(function (Dog $dog) {
+                $name = $dog->getName();
+                if ($dog->hasBreed()) {
+                    $name .= ' (' . $dog->dogBreed->getName() . ')';
+                }
                 return [
                     'id' => $dog->id,
-                    'name' => sprintf('%s (%s)', $dog->name, $dog->dogBreed->name)
+                    'name' => $name,
                 ];
             })
             ->toArray();
