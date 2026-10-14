@@ -1,18 +1,38 @@
 <x-modal.wrapper size="5xl">
-    <x-slot name="title">{{$dog->name}} ({{$dog->dogBreed->name}})</x-slot>
+    @php
+        /** @var \App\Models\Dog $dog */
+    @endphp
+    <x-slot name="title">
+        {{$dog->name}}
+        @if($dog->hasBreed())
+            ({{$dog->dogBreed->name}})
+        @endif
+    </x-slot>
     <x-slot name="content">
         <div class="flex flex-col gap-4 bg-neutral-50  rounded-md p-4 shadow-md">
             <div class="flex flex-wrap gap-4 justify-between w-full ">
                 <hgroup>
                     <h2 class="text-xl font-bold">Owner:</h2>
-                    <p>{{$dog->customer->name}}</p>
+                    @if($dog->hasCustomer())
+                        {{$dog->customer->getName()}}
+                    @else
+                        <i>
+                            {{$dog->customerFallback()}}
+                        </i>
+                    @endif
                 </hgroup>
                 <hgroup>
                     <h2 class="text-xl font-bold">Phone Number:</h2>
                     <p>
-                        <x-icon name="phone" class="inline size-5 text-brand-dark"/>
-                        <a class="underline"
-                           href="tel:{{$dog->customer->phone_number}}">{{$dog->customer->phone_number}}</a>
+                        @if($dog->hasCustomer())
+                            <x-icon name="phone" class="inline size-5 text-brand-dark"/>
+                            <a class="underline"
+                               href="tel:{{$dog->customer->phone_number}}">{{$dog->customer->phone_number}}</a>
+                        @else
+                            <i>
+                                {{$dog->customerFallback()}}
+                            </i>
+                        @endif
                     </p>
                 </hgroup>
                 <hgroup>
@@ -22,7 +42,7 @@
             </div>
             <hgroup>
                 <h2 class="text-xl font-bold">Notes:</h2>
-                <p>{!! $this->dog->notes_br !!}</p>
+                <p>{!! $dog->notes_br !!}</p>
             </hgroup>
         </div>
         <div class="my-8 flex flex-col gap-4 w-full bg-neutral-50 rounded-md p-4 shadow-md">
