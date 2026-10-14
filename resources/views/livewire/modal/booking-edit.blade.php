@@ -33,7 +33,6 @@
             </div>
             <x-form.wrapper class="w-full">
                 <x-form.label for="dog_id" class="relative">Dog
-                    <span class="text-red-500">*</span>
                     <x-mini-button class="absolute top-[-25%]" rounded icon="plus" flat rose
                                    @click="$dispatch('modal-open', {component: 'modal.dog-create'})"/>
                 </x-form.label>

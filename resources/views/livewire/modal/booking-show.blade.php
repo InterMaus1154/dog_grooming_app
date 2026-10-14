@@ -63,7 +63,9 @@
     </x-slot>
     <x-slot name="footer">
         <div class="grid grid-cols-2  md:flex gap-4 md:justify-start flex-wrap">
-            <x-button light teal lg icon="eye" class="text-black!" @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}} }})">Show Dog Details</x-button>
+            @if($booking->getDogId())
+                <x-button light teal lg icon="eye" class="text-black!" @click="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}} }})">Show Dog Details</x-button>
+            @endif
             <x-button light info lg icon="pencil" class="text-black!"
                       @click="$dispatch('modal-open', {component: 'modal.booking-edit', componentData: { id: {{$booking->id}} }})">
                 Edit

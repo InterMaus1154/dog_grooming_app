@@ -25,7 +25,7 @@ class BookingShow extends Component
     public function deleteBooking(): void
     {
         $this->dispatch(LivewireEvent::MODAL_OPEN->value, 'modal.confirm', [
-            'message' => sprintf('This will delete booking for %s on %s', $this->booking->dog->name, $this->booking->scheduled_at->format('H:i, l d/m/y')),
+            'message' => sprintf('This will delete booking for %s on %s', $this->booking->getTitle(), $this->booking->scheduled_at->format('H:i, l d/m/y')),
             'event' => LivewireEvent::DELETE_BOOKING->value,
             'eventData' => [$this->booking->id]
         ]);

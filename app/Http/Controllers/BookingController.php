@@ -23,9 +23,14 @@ class BookingController extends Controller
             ->with('dog', 'dog.dogBreed')
             ->get()
             ->map(function (Booking $booking) {
+                $dog = $booking->getDog();
+                $title = $dog
+                    ? sprintf('%s (%s)', $dog->getName(), $dog->hasBreed() ? $dog->dogBreed->name : $dog->breedFallback())
+                    : $booking->getTitle();
+
                 return [
                     'id' => $booking->id,
-                    'title' => sprintf('%s (%s)', $booking->dog->name, $booking->dog->dogBreed->name),
+                    'title' => $title,
                     'start' => $booking->scheduled_at->format('Y-m-d H:i:s'),
                     'end' => $booking->ends_at?->format('Y-m-d H:i:s'),
                     'color' => $booking->status->getCSSColor(),

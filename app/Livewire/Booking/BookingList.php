@@ -26,7 +26,7 @@ class BookingList extends Component
     {
         $booking->loadMissing('dog');
         $this->dispatch(LivewireEvent::MODAL_OPEN->value, 'modal.confirm', [
-            'message' => sprintf('This will delete booking for %s on %s', $booking->dog->name, $booking->scheduled_at->format('H:i, l d/m/y')),
+            'message' => sprintf('This will delete booking for %s on %s', $booking->getTitle(), $booking->scheduled_at->format('H:i, l d/m/y')),
             'event' => LivewireEvent::DELETE_BOOKING_ON_LIST->value,
             'eventData' => [$booking->id]
         ]);
