@@ -28,6 +28,7 @@ class BookingEdit extends Component
         $this->form->dateTime = $this->booking->scheduled_at->format('Y-m-d\TH:i');
         $this->form->endsTime = $this->booking->ends_at->format('H:i');
         $this->form->amount = $this->booking->amount;
+        $this->form->title = $this->booking->getTitle();
     }
 
     public function save(): void
@@ -42,7 +43,8 @@ class BookingEdit extends Component
                 'notes' => $this->form->notes,
                 'treatment' => $this->form->treatment,
                 'ends_at' => Carbon::parse($this->form->dateTime)->setTimeFromTimeString($this->form->endsTime),
-                'status' => $this->form->status
+                'status' => $this->form->status,
+                'title' => $this->form->title,
             ]);
 
             $this->notification()->success('Successfully updated booking');

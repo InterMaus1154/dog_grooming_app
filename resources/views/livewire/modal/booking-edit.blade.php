@@ -6,6 +6,15 @@
     </x-slot>
     <x-slot name="content">
         <form id="form-{{$this->getId()}}" wire:submit="save()" class="space-y-4">
+            <div>
+                <x-form.wrapper>
+                    <x-form.label for="title">Booking Title</x-form.label>
+                    <x-form.input type="text" wire:model="form.title" id="title"/>
+                    @error('form.title')
+                    <x-alert negative>{{$message}}</x-alert>
+                    @enderror
+                </x-form.wrapper>
+            </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <x-form.wrapper >
                     <x-form.label for="date">Date</x-form.label>

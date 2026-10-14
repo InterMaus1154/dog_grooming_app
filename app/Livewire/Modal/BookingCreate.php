@@ -41,7 +41,8 @@ class BookingCreate extends Component
                 'amount' => $this->form->amount,
                 'notes' => $this->form->notes,
                 'treatment' => $this->form->treatment,
-                'ends_at' => Carbon::parse($this->form->dateTime)->setTimeFromTimeString($this->form->endsTime)
+                'ends_at' => Carbon::parse($this->form->dateTime)->setTimeFromTimeString($this->form->endsTime),
+                'title' => $this->form->title,
             ]);
 
             $this->notification()->success('Successfully created booking');

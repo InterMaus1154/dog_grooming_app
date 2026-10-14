@@ -44,7 +44,7 @@
                                   @keyup.enter="$dispatch('modal-open', {component: 'modal.dog-show', componentData: {id: {{$booking->dog_id}}}})">
                                 {{$booking->dog->name}}
                                 @if($booking->dog->hasBreed())
-                                    {{$booking->dog->dogBreed->getName()}})
+                                    ({{$booking->dog->dogBreed->getName()}})
                                 @endif
                             </span>
                         @else
