@@ -17,13 +17,6 @@ class CustomerCreate extends Component
 
     public CustomerForm $form;
 
-    private CustomerService $customerService;
-
-    public function boot(): void
-    {
-
-    }
-
     public function save(): void
     {
         $this->validate();
@@ -33,7 +26,6 @@ class CustomerCreate extends Component
                 'name' => $this->form->name,
                 'phone_number' => $this->form->phoneNumber
             ]);
-            $this->customerService->createCustomer();
             $this->notification()->success('Customer successfully created!');
         } catch (\Exception $e) {
             $this->notification()->error('Error at creating a new customer. Contact your administrator');
